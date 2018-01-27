@@ -6,6 +6,9 @@ TagManager:
   tags:
   - OutterLayer_RegFlower
   - stigma
+  - Flower1
+  - Flower2
+  - Flower3
   layers:
   - Default
   - TransparentFX
