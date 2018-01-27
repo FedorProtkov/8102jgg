@@ -24,7 +24,7 @@ GameObject:
   - component: {fileID: 23414616344979804}
   m_Layer: 0
   m_Name: collider1
-  m_TagString: OutterLayer_RegFlower
+  m_TagString: Flower1
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
