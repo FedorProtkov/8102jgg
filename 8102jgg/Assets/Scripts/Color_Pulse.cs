@@ -47,7 +47,7 @@ public class Color_Pulse : MonoBehaviour
 		}
 		else
 		{
-			material.color = Color.gray;
+			material.color = startColor;
 		}
 	}
 }
