@@ -4,11 +4,11 @@
 TagManager:
   serializedVersion: 2
   tags:
-  - OutterLayer_RegFlower
   - stigma
   - Flower1
   - Flower2
   - Flower3
+  - intro_closer
   layers:
   - Default
   - TransparentFX

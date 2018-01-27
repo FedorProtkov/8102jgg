@@ -25,10 +25,22 @@ public class FlowerToFlower : MonoBehaviour
 	//array of strings that correspong to the tags of the outter colliders of each flower
 	private string[] flowers = { "Flower1", "Flower2", "Flower3", "Flower4", "Flower5" };
 
+
+	//public booleans to trigger the text in the introduction
+	public static bool intro_approach = false;
+	public static bool intro_closer = false;
+	public static bool intro_connect = false;
+	public static bool intro_drink = false;
+	public static bool intro_follow = false;
+	public static bool intro_wrongFlower = false;
+
+
 	// Use this for initialization
 	void Start ()
 	{
-		
+
+		//boolean that allows the first message of the game to display
+		intro_approach = true;	
 	}
 	
 	// Update is called once per frame
@@ -45,8 +57,8 @@ public class FlowerToFlower : MonoBehaviour
 				if (Input.GetKeyDown (KeyCode.Space) && !NectarCollected) {
 
 					//increment counter : a new flower is the goal
-				
 					counter++;
+
 					Debug.Log ("counter " + counter);
 
 					//the nectar has been collected
@@ -54,10 +66,17 @@ public class FlowerToFlower : MonoBehaviour
 
 					//ANIMATION : the nectar being consumed && the beak changing color && the flower changing color
 
+					//if we are in the introduction of the game
+					if (counter == 0) {
 
+						//set previous boolean to false so the correct message appears
+						intro_drink = false;
+
+						//set boolean to true so the message can appear in Introduction script
+						intro_follow = true;
+					}
 				}
 			}
-
 		}
 	}
 
@@ -67,12 +86,35 @@ public class FlowerToFlower : MonoBehaviour
 		Debug.Log ("counter " + counter);
 		Debug.Log ("flowers[counter] : " + flowers [counter]);
 
+		//if the HB enters a close range of the FIRST CORRECT flower
+		if (theCollision.gameObject.tag == "intro_closer") {
+
+			//if we are in the introduction of the game
+			if (counter == 0) {
+
+				//set previous boolean to false so the correct message appears
+				intro_approach = false;
+
+				//set boolean to true so the message can appear in Introduction script
+				intro_closer = true;
+			}
+		}
+
 		//if the HB enters a close range of the CORRECT flower
 		if (theCollision.gameObject.tag == flowers [counter]) {
 
+			//if we are in the introduction of the game
+			if (counter == 0) {
+
+				//set previous boolean to false so the correct message appears
+				intro_closer = false;
+
+				//set boolean to true so the message can appear in Introduction script
+				intro_connect = true;
+			}
+
 			//the nectar hasn't been collected yet
 			NectarCollected = false;
-
 
 			//the HB is close enough to the flower and could proceed to drink nectar
 			closeEnough = true;
@@ -82,10 +124,24 @@ public class FlowerToFlower : MonoBehaviour
 			Debug.Log ("closeEnough : " + closeEnough);
 			Debug.Log ("Possible nectar");
 
+			//if we are in the introduction of the game
+			if (counter == 0) {
+
+				//set boolean to false so the correct message appears
+				intro_wrongFlower = false;
+			}
+
 		//if the HB enters a close range of the WRONG flower
 		} else {
 
 			Debug.Log ("Not ready for this flower yet");
+
+			//if we are in the introduction of the game
+			if (counter == 0) {
+
+				//set boolean to true so the message can appear in Introduction script
+				intro_wrongFlower = true;
+			}
 
 			//ANIMATION : flower closes
 		}
@@ -94,6 +150,16 @@ public class FlowerToFlower : MonoBehaviour
 		//***** MAY HAVE TO ADJUST COLLIDER ELEMENT IN UNITY AS IT IS NOT THE ENTIRE BODY OF THE BIRD
 		//THAT SHOULD TRIGGER THIS IF STATEMENT BUT ONLY THE BEAK***
 		if (theCollision.gameObject.tag == "stigma") {
+
+			//if we are in the introduction of the game
+			if (counter == 0) {
+
+				//set previous boolean to false so the correct message appears
+				intro_connect = false;
+
+				//set boolean to true so the message can appear in Introduction script
+				intro_drink = true;
+			}
 
 			//the nectar is accessible
 			accessibleNectar = true;
@@ -114,6 +180,11 @@ public class FlowerToFlower : MonoBehaviour
 			closeEnough = false;
 
 			Debug.Log ("closeEnough : " + closeEnough);
+
+		//when the HB is no longer in close range of the WRONG flower
+		}else{
+
+		//ANIMATION : flower opens again
 		}
 
 		//when the HB's beak is no longer in contact with stigma
