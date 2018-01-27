@@ -26,7 +26,7 @@ public class Introduction_Text : MonoBehaviour
 	{
 
 		//if the player is wondering for what to do first
-		if (FlowerToFlower.counter == 0) {
+		if (FlowerToFlower.counter <= 1) {
 
 			//we are in introduction mode
 			introduction = true;
