@@ -21,10 +21,11 @@ public class FlowerToFlower : MonoBehaviour
 		if (closeEnough) {
 
 			if (accessibleNectar) {
-				Debug.Log ("Press X to drink nectar");
+				
 
 				if (Input.GetKeyDown (KeyCode.Space)) {
 					counter++;
+					Debug.Log ("counter " + counter);
 					//animation : the nectar being consumed && the beak changing color && the flower changing color
 
 
@@ -57,6 +58,15 @@ public class FlowerToFlower : MonoBehaviour
 			//flower closing animation
 		}
 
+		if (theCollision.gameObject.tag == "stigma") {
+
+			accessibleNectar = true;
+			Debug.Log ("Press X to drink nectar");	
+			Debug.Log("accessibleNectar : " + accessibleNectar);
+			//}
+
+		}
+
 		//}
 	}
 
@@ -66,24 +76,8 @@ public class FlowerToFlower : MonoBehaviour
 			closeEnough = false;
 			Debug.Log("closeEnough : " + closeEnough);
 		}
-	}
 
-	void OnCollisionEnter (Collision col)
-	{
-		Debug.Log("ON COLLISION ENTER");
-		if (col.gameObject.name == "stigma") {
-
-			accessibleNectar = true;	
-			Debug.Log("accessibleNectar : " + accessibleNectar);
-			//}
-
-		}
-	}
-
-	void OnCollisionExit (Collision col)
-	{
-		Debug.Log("ON COLLISION EXIT");
-		if (col.gameObject.tag == "stigma") {
+		if (theCollision.gameObject.tag == "stigma") {
 
 			accessibleNectar = false;	
 			Debug.Log("accessibleNectar : " + accessibleNectar);
@@ -91,5 +85,29 @@ public class FlowerToFlower : MonoBehaviour
 
 		}
 	}
+
+//	void OnCollisionEnter (Collision col)
+//	{
+//		Debug.Log("ON COLLISION ENTER");
+//		if (col.gameObject.name == "stigma") {
+//
+//			accessibleNectar = true;	
+//			Debug.Log("accessibleNectar : " + accessibleNectar);
+//			//}
+//
+//		}
+//	}
+
+//	void OnCollisionExit (Collision col)
+//	{
+//		Debug.Log("ON COLLISION EXIT");
+//		if (col.gameObject.tag == "stigma") {
+//
+//			accessibleNectar = false;	
+//			Debug.Log("accessibleNectar : " + accessibleNectar);
+//			//}
+//
+//		}
+//	}
 
 }

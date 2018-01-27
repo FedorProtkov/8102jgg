@@ -234,6 +234,11 @@ Prefab:
       propertyPath: m_TagString
       value: Flower2
       objectReference: {fileID: 0}
+    - target: {fileID: 65935369344069012, guid: 2d2b89bd0e9bf4440882483926cd209c,
+        type: 2}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d2b89bd0e9bf4440882483926cd209c, type: 2}
   m_IsPrefabParent: 0
@@ -433,6 +438,11 @@ Prefab:
       propertyPath: m_TagString
       value: Flower1
       objectReference: {fileID: 0}
+    - target: {fileID: 136014212903622496, guid: 2d2b89bd0e9bf4440882483926cd209c,
+        type: 2}
+      propertyPath: m_IsTrigger
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2d2b89bd0e9bf4440882483926cd209c, type: 2}
   m_IsPrefabParent: 0
@@ -478,6 +488,11 @@ Prefab:
     - target: {fileID: 114172759517653302, guid: 322dcc9f87ce34e6ea23e7b47a47bc02,
         type: 2}
       propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 65019697683157600, guid: 322dcc9f87ce34e6ea23e7b47a47bc02,
+        type: 2}
+      propertyPath: m_IsTrigger
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
