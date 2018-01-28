@@ -1,9 +1,9 @@
 ﻿//#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
-#define PS4_CONTROLLER
+//#define PS4_CONTROLLER
 //Uncomment this macro if you're using a PS3 controller
-//#define PS3_CONTROLLER
+#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
@@ -20,7 +20,6 @@ public class InputManager : MonoBehaviour
 	/**A reference to the bird's head gameobject*/
 	[SerializeField] GameObject m_BirdHead;
 
-	[SerializeField] GameObject m_BirdBody;
 
 	/**A variable we need to introduce to account for my shitty controller. As it is, we have small issues with the sensitivity of the joysticks.
 	*This value will therefore be what the input of a given joystick needs to be greater than in order to be considered valid input.
@@ -38,6 +37,10 @@ public class InputManager : MonoBehaviour
 	private Vector3 m_CurrentDirection = Vector3.zero;
 	/**The maximal speed at which the player can rotate the camera about the y-axis*/
 	public float m_MaximalRotationSpeed;
+	/**The maximal speed at which the birds rotates as a consequence of player movement.*/
+	private float m_CurrentBirdRotationVelocity = 0.0f;
+	/**The rate at which the bird reaches the maximal rotation speed.*/
+	public float m_RotationAcceleration;
 
 	/**The name of the input axis responsible for the horizontal component of the left joystick*/
 	public static readonly string INPUT_CONTROLLER_LEFTJOYSTICK_X = "Left Joystick X";
@@ -62,7 +65,7 @@ public class InputManager : MonoBehaviour
 	{
 		this.ManagePlayerInputForMovement ();
 		this.ManagePlayerInputForCameraRotation ();
-
+		this.FaceCurrentDirection ();
 	}
 
 	/**A function to manage movement with respect to user input.*/
@@ -265,5 +268,40 @@ public class InputManager : MonoBehaviour
 			}
 		}
 		this.m_PlayerContainer.transform.position += displacement_to_apply;
+	}
+
+	private void FaceCurrentDirection()
+	{
+		float acceptable_margin = 0.05f;
+		float dot_product = Vector3.Dot (this.m_PlayerGameObject.transform.forward, this.m_CurrentDirection);
+		//if the dot product is beyond acceptable margin...
+		if (Mathf.Abs(1 - dot_product) > acceptable_margin) {
+			//...adjust the direction in which the bird's facing
+
+			if (this.m_CurrentBirdRotationVelocity == 0.0f) {
+				//find the angle we need to get to
+				float angle = Vector3.Angle(this.m_PlayerGameObject.transform.forward, this.m_CurrentDirection);
+			}
+			//...adjust the direction in which the bird's facing
+			float angle = Vector3.Angle(this.m_PlayerGameObject.transform.forward, this.m_CurrentDirection);
+		}
+		//else if no movement input is detected...
+		else
+		{
+			if (this.m_CurrentBirdRotationVelocity > 0.0f)
+			{
+				//...then decrease the current velocity
+				this.m_CurrentBirdRotationVelocity -= this.m_RotationAcceleration * 5.0f * Time.fixedDeltaTime;
+				if (this.m_CurrentBirdRotationVelocity < 0.0f)
+				{
+					this.m_CurrentBirdRotationVelocity = 0.0f;
+				}
+				//...and apply the rotation on the bird
+//				+= Vector3.ClampMagnitude (this.m_CurrentDirection, this.m_CurrentVelocity * Time.fixedDeltaTime);
+				Vector3 euler_angles = this.m_PlayerContainer.transform.rotation.eulerAngles;
+				this.m_PlayerContainer.transform.Rotate(
+			}
+
+		}//end else
 	}
 }
