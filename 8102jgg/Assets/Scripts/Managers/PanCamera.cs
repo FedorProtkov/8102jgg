@@ -28,7 +28,7 @@ public class PanCamera : MonoBehaviour
 	public Camera cam1;
 	public Camera cam2;
 
-	float countdownToChange = 3.0f;
+	float countdownToChange = 5.0f;
 
 	public AudioSource elementSource;
 	public AudioSource elementSource1;
