@@ -36,11 +36,11 @@ public class GuidingFireflyManager : MonoBehaviour {
 			this.ManageMovement();
 		}
 
-		//Pollenate
-		if (Input.GetKeyDown (KeyCode.Space)) {
-			this.m_BCM.ChangeBeakColorToNextInSequence ();
-			this.ChaseNextFlower ();
-		}
+//		//Pollenate
+//		if (Input.GetKeyDown (KeyCode.Space)) {
+//			this.m_BCM.ChangeBeakColorToNextInSequence ();
+//			this.ChaseNextFlower ();
+//		}
 	}
 
 	private void ManageMovement()

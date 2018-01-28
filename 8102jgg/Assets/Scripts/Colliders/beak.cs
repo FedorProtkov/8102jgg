@@ -20,11 +20,7 @@ public class beak : MonoBehaviour {
 	public static bool intro_drink = false;
 	public static bool intro_follow = false;
 
-	// Use this for initialization
-	void Start () {
-//		Debug.Log("BEAK SCRIPT CONNECT");
-	}
-	
+
 	// Update is called once per frame
 	void Update () {
 
@@ -43,6 +39,9 @@ public class beak : MonoBehaviour {
 
 			//if control is pressed
 			if (this.m_IM.ReturnPollenationInput() && !NectarCollected) {
+
+
+
 				//if we are in the introduction of the game
 				if (counter == 0) {
 
