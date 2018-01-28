@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 2e1e8c7c972754483b2f3c62db4fd3c7
 timeCreated: 1517113933
+=======
+guid: 7943e212001ae1b4d8476bcfdf64e2cf
+timeCreated: 1517126388
+>>>>>>> RichardLand
 licenseType: Free
 ModelImporter:
   serializedVersion: 22

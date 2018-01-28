@@ -1,6 +1,11 @@
 fileFormatVersion: 2
+<<<<<<< HEAD
 guid: 16506139aa0af4b8c8f076765b1277ac
 timeCreated: 1517106061
+=======
+guid: f00775ae210286a488b5862e38ab5beb
+timeCreated: 1517126381
+>>>>>>> RichardLand
 licenseType: Free
 TextureImporter:
   fileIDToRecycleName: {}
