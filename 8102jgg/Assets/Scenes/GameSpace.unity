@@ -961,7 +961,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1342310101
+  randomSeed: 1562679255
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -5128,6 +5128,7 @@ MonoBehaviour:
   - {fileID: 1616774093}
   - {fileID: 529834578}
   - {fileID: 648900394}
+  m_FireflyMovementSpeed: 8
 --- !u!1001 &1685185352
 Prefab:
   m_ObjectHideFlags: 0
