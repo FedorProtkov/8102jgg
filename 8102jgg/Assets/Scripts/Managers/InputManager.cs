@@ -16,6 +16,10 @@ public class InputManager : MonoBehaviour {
 	[SerializeField] GameObject m_PlayerContainer;
 	/**A reference to the actual player gameobject*/
 	[SerializeField] GameObject m_PlayerGameObject;
+	/**A reference to the bird's head gameobject*/
+	[SerializeField] GameObject m_BirdHead;
+
+	[SerializeField] GameObject m_BirdBody;
 
 	/**A variable we need to introduce to account for my shitty controller. As it is, we have small issues with the sensitivity of the joysticks.
 	*This value will therefore be what the input of a given joystick needs to be greater than in order to be considered valid input.
@@ -48,6 +52,9 @@ public class InputManager : MonoBehaviour {
 	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_X = "PS4 Controller X";
 	/**The name of the input button corresponding to the PS4 controller square button*/
 	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_SQUARE = "PS4 Controller Square";
+
+	/**The layer containing all objects belonging to the scene that specifically cannot be passed through.*/
+	public static readonly string LAYER_SCENERY = "Scenery";
 
 	// Update is called once per frame
 	void Update () {
@@ -139,6 +146,7 @@ public class InputManager : MonoBehaviour {
 			displacement_to_apply = this.ConvertDisplacementToBeCameraSubjective (displacement_to_apply);
 
 			//Apply transformation
+//			this.CheckForCollisionAndApplyDisplacementIfPossible(displacement_to_apply);
 			this.m_PlayerContainer.transform.position += displacement_to_apply;
 
 			this.m_CurrentDirection = Vector3.Normalize (displacement_to_apply);
@@ -211,6 +219,7 @@ public class InputManager : MonoBehaviour {
 		|| this.DoesInputSurpassJoystickErrorMargin (left_joystick_vertical_input)));
 	}
 
+	/**A function to return a vector that contains the input collected from the user, converted to a motion vector relative to the camera*/
 	private Vector3 ConvertDisplacementToBeCameraSubjective (Vector3 displacement_to_apply)
 	{
 		Camera camera = this.m_PlayerContainer.transform.GetComponentInChildren<Camera> ();
@@ -223,5 +232,25 @@ public class InputManager : MonoBehaviour {
 		z_plus = Vector3.ClampMagnitude (z_plus, displacement_to_apply.z);
 		vector_to_return = vector_to_return + z_plus;
 		return vector_to_return;
+	}
+
+	/**A function to check to see whether applying a given displacement to the bird leads to a collision.
+	*If so, the displacement is not applied.*/
+	private void CheckForCollisionAndApplyDisplacementIfPossible(Vector3 displacement_to_apply)
+	{
+		int scenery_layermask = UnityEngine.LayerMask.NameToLayer (LAYER_SCENERY);
+
+//		Debug.Log ("Player container position: " + this.m_PlayerContainer.transform.position.x + ", "
+//			+ this.m_PlayerContainer.transform.position.y + ", "
+//			+ this.m_PlayerContainer.transform.position.z);
+
+		foreach (RaycastHit hit in Physics.RaycastAll(this.m_BirdHead.gameObject.transform.position, displacement_to_apply, displacement_to_apply.magnitude * 25.0f)) {
+			if (hit.collider.gameObject.layer == UnityEngine.LayerMask.NameToLayer ("Scenery")) {
+				Debug.Log ("Hit scenery element " + hit.collider.gameObject.name);
+				this.m_CurrentVelocity = 0.0f;
+				return;
+			}
+		}
+		this.m_PlayerContainer.transform.position += displacement_to_apply;
 	}
 }
