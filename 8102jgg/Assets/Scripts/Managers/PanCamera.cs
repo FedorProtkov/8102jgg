@@ -63,21 +63,10 @@ public class PanCamera : MonoBehaviour
 				if (countdownToChange <= 0.0f)
 				{
 					cam1.enabled = !cam1.enabled;
-//				StartCoroutine (this.WasteTimeBeforeCameraTransition (20.0f));
 					cam2.enabled = !cam2.enabled;
 				}
 			}
 		}
-
-//		if (!resetTime)
-//		{
-//			if (ConcentrationConfig.correctScroll)
-//			{
-//				selectingUnits = false;
-//				time = 0;
-//				resetTime = true;
-//			}
-//		}
 
 		if (!selectingUnits)
 		{
@@ -85,18 +74,7 @@ public class PanCamera : MonoBehaviour
 			finishedUnits = true;
 		}
 
-//		if (finishedUnits)
-//		{
-//			kodama.gameObject.GetComponent<CanvasGroup> ().alpha = 0;
-//			Destroy (kodama.gameObject);
-//		}
 	}
-
-	//	private IEnumerator WasteTimeBeforeCameraTransition (float seconds)
-	//	{
-	//
-	//		yield return new WaitForSeconds (seconds);
-	//	}
 
 	public IEnumerator Transition (Vector3 startPos, Vector3 targetPos)
 	{
