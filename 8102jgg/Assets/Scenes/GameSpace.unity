@@ -113,6 +113,11 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
+--- !u!1 &139241270 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1168219706186254, guid: f08ea36ff19634a449320f1a09f20b3b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1674618398}
 --- !u!1001 &139638766
 Prefab:
   m_ObjectHideFlags: 0
@@ -464,6 +469,18 @@ Prefab:
       propertyPath: m_RootOrder
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 4513334728828846, guid: f08ea36ff19634a449320f1a09f20b3b, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513334728828846, guid: f08ea36ff19634a449320f1a09f20b3b, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4513334728828846, guid: f08ea36ff19634a449320f1a09f20b3b, type: 2}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: f08ea36ff19634a449320f1a09f20b3b, type: 2}
   m_IsPrefabParent: 0
@@ -509,13 +526,14 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerContainer: {fileID: 787964925}
   m_PlayerGameObject: {fileID: 1535389041}
-  m_BirdHead: {fileID: 0}
+  m_BirdHead: {fileID: 139241270}
   m_ControllerJoystickErrorMargin: 0.2
   m_TerminalVelocity: 10
   m_Acceleration: 12
   m_MaximalRotationSpeed: 100
-  m_MaximalBirdRotationVelocity: 0.00001
+  m_MaximalBirdRotationVelocity: 1.5
   m_RotationAcceleration: 0
+  m_BeakRotationSpeed: 2500
 --- !u!1 &1703855234
 GameObject:
   m_ObjectHideFlags: 0

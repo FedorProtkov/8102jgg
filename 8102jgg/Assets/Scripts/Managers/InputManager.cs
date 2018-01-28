@@ -1,4 +1,4 @@
-﻿//#define TESTING_INPUTS
+﻿#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
 //#define PS4_CONTROLLER
@@ -44,16 +44,22 @@ public class InputManager : MonoBehaviour
 	/**The rate at which the bird reaches the maximal rotation speed.*/
 	public float m_RotationAcceleration;
 
+	public float m_BeakRotationSpeed;
+
 	/**The name of the input axis responsible for the horizontal component of the left joystick*/
 	public static readonly string INPUT_CONTROLLER_LEFTJOYSTICK_X = "Left Joystick X";
 	/**The name of the input axis responsible for the vertical component of the left joystick*/
 	public static readonly string INPUT_CONTROLLER_LEFTJOYSTICK_Y = "Left Joystick Y";
 	/**The name of the input axis responsible for the horizontal component of the right joystick*/
 	public static readonly string INPUT_CONTROLLER_RIGHTJOYSTICK_X = "Right Joystick X";
+	/**The name of the input axis responsible for the vertical component of the right joystick*/
+	public static readonly string INPUT_CONTROLLER_RIGHTJOYSTICK_Y = "Right Joystick Y";
 	/**The name of the input button corresponding to the controller X button*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_X = "Controller X";
 	/**The name of the input button corresponding to the controller square button*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_SQUARE = "Controller Square";
+	/**The name of the input button corresponding to the ps3 controller RT*/
+	public static readonly string INPUT_CONTROLLER_BUTTON_RT = "PS3 Controller RT";
 	/**The name of the input button corresponding to the PS4 controller X button*/
 	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_X = "PS4 Controller X";
 	/**The name of the input button corresponding to the PS4 controller square button*/
@@ -62,12 +68,72 @@ public class InputManager : MonoBehaviour
 	/**The layer containing all objects belonging to the scene that specifically cannot be passed through.*/
 	public static readonly string LAYER_SCENERY = "Scenery";
 
+	public static bool m_IsFocused = false;
+
 	// Update is called once per frame
-	void Update ()
+	void LateUpdate ()
 	{
+		this.ManageFocusTrigger ();
+
 		this.ManagePlayerInputForMovement ();
-		this.ManagePlayerInputForCameraRotation ();
 		this.FaceCurrentDirection ();
+
+		//If the player isn't holding down the RT, then the right joystick allows them to rotate the camera
+		if (!m_IsFocused) {
+			this.ManagePlayerInputForCameraRotation ();
+		} 
+		//else if the player is holding down RT, then the right joystick allows them to rotate the beak
+		else {
+			this.ManageBeakRotation ();
+		}
+	}
+
+	/**A function to update the bool corresponding to the focus*/
+	private void ManageFocusTrigger ()
+	{
+		#if PS3_CONTROLLER
+		m_IsFocused = Input.GetButton (INPUT_CONTROLLER_BUTTON_RT);
+		#elif
+		#endif
+	}
+
+	/**A function to manage the beak's (head's) rotation with respect to player input on the right joystick*/
+	private void ManageBeakRotation ()
+	{
+		#if TESTING_INPUTS
+		string message = "";
+		#endif
+
+		float horizontal_rotation = Input.GetAxis (INPUT_CONTROLLER_RIGHTJOYSTICK_X);
+		float vertical_rotation = Input.GetAxis (INPUT_CONTROLLER_RIGHTJOYSTICK_Y);
+
+		//if we have either horizontal or vertical input
+		if (horizontal_rotation != 0.0f || vertical_rotation != 0.0f)
+		{
+//			//and if the horizontal input is within the acceptable norms
+			if (this.DoesInputSurpassJoystickErrorMargin (horizontal_rotation)) {
+				//then rotate the head about the y-axis
+				this.m_BirdHead.transform.Rotate(new Vector3(-(this.m_BeakRotationSpeed * horizontal_rotation * Time.fixedDeltaTime), 0.0f, 0.0f));
+				#if TESTING_INPUTS
+				message += "Right joystick horizontal input detected.\n";
+				#endif
+			}
+			//and if the vertical input is within the acceptable norms
+			if (this.DoesInputSurpassJoystickErrorMargin (vertical_rotation)) {
+				//then rotate the head about the y-axis
+				this.m_BirdHead.transform.Rotate(new Vector3(0.0f, 0.0f, this.m_BeakRotationSpeed * vertical_rotation * Time.fixedDeltaTime));
+				#if TESTING_INPUTS
+				message += "Right joystick vertical input detected.\n";
+				#endif
+			}
+
+		}//end if
+		#if TESTING_INPUTS
+		if (message != "")
+		{
+			Debug.Log(message);
+		}
+		#endif
 	}
 
 	/**A function to manage movement with respect to user input.*/
