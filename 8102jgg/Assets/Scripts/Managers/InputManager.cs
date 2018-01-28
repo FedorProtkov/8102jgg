@@ -1,5 +1,9 @@
 ﻿//#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
+//Uncomment this macro if you're using a PS4 controller
+//#define PS4_CONTROLLER
+//Uncomment this macro if you're using a PS3 controller
+#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
@@ -30,7 +34,6 @@ public class InputManager : MonoBehaviour {
 	/**The maximal speed at which the player can rotate the camera about the y-axis*/
 	public float m_MaximalRotationSpeed;
 
-
 	/**The name of the input axis responsible for the horizontal component of the left joystick*/
 	public static readonly string INPUT_CONTROLLER_LEFTJOYSTICK_X = "Left Joystick X";
 	/**The name of the input axis responsible for the vertical component of the left joystick*/
@@ -41,15 +44,18 @@ public class InputManager : MonoBehaviour {
 	public static readonly string INPUT_CONTROLLER_BUTTON_X = "Controller X";
 	/**The name of the input button corresponding to the controller square button*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_SQUARE = "Controller Square";
+	/**The name of the input button corresponding to the PS4 controller X button*/
+	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_X = "PS4 Controller X";
+	/**The name of the input button corresponding to the PS4 controller square button*/
+	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_SQUARE = "PS4 Controller Square";
 
-	
 	// Update is called once per frame
 	void Update () {
 		this.ManagePlayerInputForMovement ();
 		this.ManagePlayerInputForCameraRotation ();
 
 	}
-		
+
 	/**A function to manage movement with respect to user input.*/
 	private void ManagePlayerInputForMovement()
 	{
@@ -59,8 +65,14 @@ public class InputManager : MonoBehaviour {
 
 		float left_joystick_horizontal_input = Input.GetAxis (INPUT_CONTROLLER_LEFTJOYSTICK_X);
 		float left_joystick_vertical_input = Input.GetAxis (INPUT_CONTROLLER_LEFTJOYSTICK_Y);
+		#if PS3_CONTROLLER
 		float controller_rise_input = Input.GetButton (INPUT_CONTROLLER_BUTTON_X) ? 1.0f : 0.0f;
 		float controller_lower_input = Input.GetButton (INPUT_CONTROLLER_BUTTON_SQUARE) ? -1.0f : 0.0f;
+		#elif PS4_CONTROLLER
+		float controller_rise_input = Input.GetButton (INPUT_PS4_CONTROLLER_BUTTON_X) ? 1.0f : 0.0f;
+		float controller_lower_input = Input.GetButton (INPUT_PS4_CONTROLLER_BUTTON_SQUARE) ? -1.0f : 0.0f;
+		#endif
+
 		float y_ward_input = controller_rise_input + controller_lower_input;
 
 		#if TESTING_INPUTS
@@ -95,9 +107,6 @@ public class InputManager : MonoBehaviour {
 				message += "Left joystick horizontal input detected\n";
 				#endif
 				horizontal_displacement = left_joystick_horizontal_input * this.m_CurrentVelocity;
-//				Vector3 vector = this.m_PlayerContainer.transform.GetComponentInChildren<Camera> ().transform.right;
-//				vector = Vector3.ClampMagnitude (vector, horizontal_displacement);
-//				displacement_to_apply = vector;
 			}
 			//if there was specifically a vertical input...
 			if (left_joystick_vertical_input != 0.0f) {
@@ -105,8 +114,6 @@ public class InputManager : MonoBehaviour {
 				message += "Left joystick vertical input detected\n";
 				#endif
 				vertical_displacement = left_joystick_vertical_input * this.m_CurrentVelocity;
-//				Vector3 vector = this.m_PlayerContainer.transform.GetComponentInChildren<Camera> ().transform.right;
-//				vector = Vector3.ClampMagnitude (vector, horizontal_displacement);
 			}
 
 			//Make up new displacement vector from the respective inputs
