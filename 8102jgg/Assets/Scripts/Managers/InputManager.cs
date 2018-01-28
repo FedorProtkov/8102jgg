@@ -1,9 +1,9 @@
 //#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
-//#define PS4_CONTROLLER
+#define PS4_CONTROLLER
 //Uncomment this macro if you're using a PS3 controller
-#define PS3_CONTROLLER
+//#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
