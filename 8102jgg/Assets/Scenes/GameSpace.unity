@@ -965,6 +965,11 @@ Transform:
   m_PrefabParentObject: {fileID: 4228300796748546, guid: 6e34932dce2f2466ca94a2cbfcac00ee,
     type: 2}
   m_PrefabInternal: {fileID: 765076645}
+--- !u!1 &777370715 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1168219706186254, guid: f08ea36ff19634a449320f1a09f20b3b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1674618398}
 --- !u!1 &787964925 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1632021569586580, guid: f08ea36ff19634a449320f1a09f20b3b,
@@ -1649,12 +1654,12 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerContainer: {fileID: 787964925}
   m_PlayerGameObject: {fileID: 1535389041}
-  m_BirdHead: {fileID: 0}
+  m_BirdHead: {fileID: 777370715}
   m_ControllerJoystickErrorMargin: 0.2
-  m_UnfocusTerminalVelocity: 50
+  m_UnfocusTerminalVelocity: 80
   m_FocusTerminalVelocity: 7.5
   m_Acceleration: 12
   m_MaximalRotationSpeed: 100
   m_MaximalBirdRotationVelocity: 1.5
   m_RotationAcceleration: 0
-  m_BeakRotationSpeed: 0
+  m_BeakRotationSpeed: 2500
