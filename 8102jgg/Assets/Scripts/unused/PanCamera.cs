@@ -25,7 +25,11 @@ public class PanCamera : MonoBehaviour
 
 	private bool doneMoving = false;
 
-	public GameObject kodama;
+	public Camera cam1;
+	public Camera cam2;
+
+	float countdownToChange = 3.0f;
+	//	public GameObject kodama;
 
 	//Used the following links as a reference
 	//https://answers.unity.com/questions/64404/smooth-camera-shift-lerp-smoothshift.html
@@ -33,6 +37,8 @@ public class PanCamera : MonoBehaviour
 
 	void Start ()
 	{
+		cam1.enabled = true;
+		cam2.enabled = false;
 		start = transform.position;
 		target = targetObject.transform.position;
 		target = new Vector3 (target.x + adjustX, target.y + adjustY, target.z - adjustZ);
@@ -42,9 +48,25 @@ public class PanCamera : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (selectingUnits)
+		if (!cam2.enabled)
 		{
-			StartCoroutine (Transition (start, target));
+			if (selectingUnits)
+			{
+				StartCoroutine (Transition (start, target));
+			}
+
+			if (time >= 1)
+			{
+				countdownToChange -= Time.deltaTime;
+
+				//when countdown is less than or equal to zero
+				if (countdownToChange <= 0.0f)
+				{
+					cam1.enabled = !cam1.enabled;
+//				StartCoroutine (this.WasteTimeBeforeCameraTransition (20.0f));
+					cam2.enabled = !cam2.enabled;
+				}
+			}
 		}
 
 //		if (!resetTime)
@@ -63,12 +85,18 @@ public class PanCamera : MonoBehaviour
 			finishedUnits = true;
 		}
 
-		if (finishedUnits)
-		{
-			kodama.gameObject.GetComponent<CanvasGroup> ().alpha = 0;
-			Destroy (kodama.gameObject);
-		}
+//		if (finishedUnits)
+//		{
+//			kodama.gameObject.GetComponent<CanvasGroup> ().alpha = 0;
+//			Destroy (kodama.gameObject);
+//		}
 	}
+
+	//	private IEnumerator WasteTimeBeforeCameraTransition (float seconds)
+	//	{
+	//
+	//		yield return new WaitForSeconds (seconds);
+	//	}
 
 	public IEnumerator Transition (Vector3 startPos, Vector3 targetPos)
 	{
