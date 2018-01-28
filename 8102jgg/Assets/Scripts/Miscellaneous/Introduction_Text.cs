@@ -12,8 +12,7 @@ public class Introduction_Text : MonoBehaviour
 	public Text intro;
 	private bool introduction = true;
 	private string[] messages = {"Approach the flower", "Closer", "Connect the beak", "Press x to drink nectar",
-		"Follow the color of your beak", "Approach the correct flower"
-	};
+		"Follow the color of your beak", "Approach the correct flower"};
 
 	// Use this for initialization
 	void Start ()
