@@ -289,6 +289,22 @@ Prefab:
       propertyPath: m_Name
       value: PlayerContainer
       objectReference: {fileID: 0}
+    - target: {fileID: 4892833078734308, guid: c88102b3d2acc41d9b035707175ad668, type: 2}
+      propertyPath: m_LocalRotation.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892833078734308, guid: c88102b3d2acc41d9b035707175ad668, type: 2}
+      propertyPath: m_LocalRotation.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892833078734308, guid: c88102b3d2acc41d9b035707175ad668, type: 2}
+      propertyPath: m_LocalRotation.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4892833078734308, guid: c88102b3d2acc41d9b035707175ad668, type: 2}
+      propertyPath: m_LocalRotation.w
+      value: 1
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: c88102b3d2acc41d9b035707175ad668, type: 2}
   m_IsPrefabParent: 0
