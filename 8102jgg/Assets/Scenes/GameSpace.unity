@@ -5193,6 +5193,8 @@ MonoBehaviour:
   adjustZ: -11.3
   cam1: {fileID: 1593313388}
   cam2: {fileID: 1558398912}
+  elementSource: {fileID: 0}
+  elementSource1: {fileID: 0}
 --- !u!1001 &1674618398
 Prefab:
   m_ObjectHideFlags: 0
@@ -5314,6 +5316,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 718aefc809a914e0fa7b1d6d0c64c2c1, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  m_GuidingFirefly: {fileID: 0}
+  m_Player: {fileID: 0}
+  m_MainCamera: {fileID: 0}
+  m_Flowers: []
+  m_FireflyMovementSpeed: 0
 --- !u!1001 &1685185352
 Prefab:
   m_ObjectHideFlags: 0
