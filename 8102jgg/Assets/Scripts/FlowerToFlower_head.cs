@@ -9,7 +9,7 @@ public class FlowerToFlower_head : MonoBehaviour
 {
 
 	//variable that keeps that of which flower the HB must go to
-	public static int counter = 0;
+//	public static int counter = 0;
 
 	//boolean that keeps track if the HB is close enough of the flower (it can be approach even more to drink nectar)
 	//this closeness trigggers the pulsating animation of the stigma
@@ -51,7 +51,7 @@ public class FlowerToFlower_head : MonoBehaviour
 		if (ApproachIntro) { 
 
 			//if we are in the introduction of the game
-			if (counter == 0) {
+			if (FlowerToFlower.counter == 0) {
 
 				//set previous boolean to false so the correct message appears
 				intro_approach = false;
@@ -64,7 +64,7 @@ public class FlowerToFlower_head : MonoBehaviour
 			if (closeEnough) {
 
 				//if we are in the introduction of the game
-				if (counter == 0) {
+				if (FlowerToFlower.counter == 0) {
 
 					//set previous boolean to false so the correct message appears
 					intro_closer = false;
@@ -79,21 +79,22 @@ public class FlowerToFlower_head : MonoBehaviour
 	//When the HB collides with the flowers
 	void OnTriggerEnter (Collider theCollision)
 	{
-		Debug.Log ("counter " + counter);
-		Debug.Log ("flowers[counter] : " + flowers [counter]);
+		Debug.Log ("counter " + FlowerToFlower.counter);
+		Debug.Log ("flowers[counter] : " + flowers [FlowerToFlower.counter]);
 
 		//if the HB enters a close range of the FIRST CORRECT flower
 		if (theCollision.gameObject.tag == "intro_closer") {
 			ApproachIntro = true;
-			
+			intro_wrongFlower = false;
 		}
 
 		//if the HB enters a close range of the CORRECT flower
-		if (theCollision.gameObject.tag == flowers [counter]) {
-
+		if (theCollision.gameObject.tag == flowers [FlowerToFlower.counter] || theCollision.gameObject.tag == "intro_closer") {
+			intro_wrongFlower = false;
 			//the HB is close enough to the flower and could proceed to drink nectar
 			closeEnough = true;
 
+//			FlowerToFlower_beak.NectarCollected = false;
 			//ANIMATION : stigma starts to pulse, indicating to the player to come closer to the stigma
 
 			Debug.Log ("closeEnough : " + closeEnough);
@@ -101,19 +102,19 @@ public class FlowerToFlower_head : MonoBehaviour
 
 			//if the HB enters a close range of the WRONG flower
 		}
-//		 else {
-//
-//			Debug.Log ("Not ready for this flower yet");
-//
-//			//if we are in the introduction of the game
-//			if (counter == 0) {
-//
-//				//set boolean to true so the message can appear in Introduction script
-//				intro_wrongFlower = true;
-//			}
-//
-//			//ANIMATION : flower closes
-//		}
+		 else {
+
+			Debug.Log ("Not ready for this flower yet");
+
+			//if we are in the introduction of the game
+			if (FlowerToFlower.counter == 0) {
+
+				//set boolean to true so the message can appear in Introduction script
+				intro_wrongFlower = true;
+			}
+
+			//ANIMATION : flower closes
+		}
 	}
 
 	//When the HB exists the space close to the flowers
@@ -121,11 +122,14 @@ public class FlowerToFlower_head : MonoBehaviour
 	{
 
 		//when the HB is no longer in close range of the flower
-		if (theCollision.gameObject.tag == flowers [counter]) {
+		if (theCollision.gameObject.tag == flowers [FlowerToFlower.counter] || theCollision.gameObject.tag == "intro_closer") {
 
+			intro_wrongFlower = false;
 			//set boolean to false
 			closeEnough = false;
-
+			intro_connect = false;
+			FlowerToFlower_beak.intro_drink = false;
+			FlowerToFlower_beak.intro_follow = false;
 			Debug.Log ("closeEnough : " + closeEnough);
 
 			//when the HB is no longer in close range of the WRONG flower

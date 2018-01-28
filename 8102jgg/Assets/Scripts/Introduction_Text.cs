@@ -26,7 +26,7 @@ public class Introduction_Text : MonoBehaviour
 	{
 
 		//if the player is wondering for what to do first
-		if (FlowerToFlower.counter <= 1) {
+		if (beak.counter <= 1) {
 
 			//we are in introduction mode
 			introduction = true;
@@ -42,46 +42,48 @@ public class Introduction_Text : MonoBehaviour
 		if (introduction) {
 
 			//if the boolean is true, meaning the player is in the stage of approaching the flower for the first time 
-			if (FlowerToFlower.intro_approach) {
+			if (head.intro_approach) {
 
 				//display the approach message
 				intro.text = messages [0];
 			}
 
 			//if the boolean is true, meaning the player is in the stage of getting a little closer to the flower
-			if (FlowerToFlower.intro_closer) {
+			if (head.intro_closer) {
 
 				//display the closer message
 				intro.text = messages [1];
 			}
 
 			//if the boolean is true, meaning the player is in the stage of connecting the beak to the stigma
-			if (FlowerToFlower.intro_connect) {
+			if (head.intro_connect) {
 
 				//display the connect message
 				intro.text = messages [2];
 			}
 
 			//if the boolean is true, meaning the player is in the stage of drinking the nectar
-			if (FlowerToFlower.intro_drink) {
+			if (beak.intro_drink) {
 
 				//display the drink message
 				intro.text = messages [3];
 			}
 
 			//if the boolean is true, meaning the player is in the stage of follow the color of its beak
-			if (FlowerToFlower.intro_follow) {
+			if (beak.intro_follow) {
 
 				//display the follow message
 				intro.text = messages [4];
 			}
 
 			//if the player approaches the wrong flower
-			if (FlowerToFlower.intro_wrongFlower) {
+			if (head.intro_wrongFlower) {
 
 				//display the message
 				intro.text = messages [5];
 			}
+		}else{
+			intro.text = "";	
 		}
 
 	}
