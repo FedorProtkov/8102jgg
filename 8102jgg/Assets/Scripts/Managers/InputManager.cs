@@ -1,9 +1,9 @@
 //#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
-#define PS4_CONTROLLER
+//#define PS4_CONTROLLER
 //Uncomment this macro if you're using a PS3 controller
-//#define PS3_CONTROLLER
+#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
@@ -63,6 +63,8 @@ public class InputManager : MonoBehaviour
 	public static readonly string INPUT_CONTROLLER_BUTTON_SQUARE = "Controller Square";
 	/**The name of the input button corresponding to the ps3 controller RT*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_RT = "PS3 Controller RT";
+
+	public static readonly string INPUT_CONTROLLER_BUTTON_Triangle = "PS3 Controller Triangle";
 	/**The name of the input button corresponding to the PS4 controller X button*/
 	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_X = "PS4 Controller X";
 	/**The name of the input button corresponding to the PS4 controller square button*/
@@ -113,6 +115,17 @@ public class InputManager : MonoBehaviour
 		}
 	}
 
+	/**A function to return true when the user presses the triangle button.
+	 * Also manages pollenation functionalities relating to the firefly; should be called in an Update function, such that it consistently check for the input.*/
+	public bool ReturnPollenationInput()
+	{
+		bool input = Input.GetButtonDown (INPUT_CONTROLLER_BUTTON_Triangle);
+		if (input) {
+			this.GetComponent<GuidingFireflyManager> ().Pollenate ();
+		}
+		return input;
+	}
+
 	/**A function to update the bool corresponding to the focus*/
 	private void ManageFocusTrigger ()
 	{
@@ -135,7 +148,7 @@ public class InputManager : MonoBehaviour
 		//if we have either horizontal or vertical input
 		if (horizontal_rotation != 0.0f || vertical_rotation != 0.0f)
 		{
-//			//and if the horizontal input is within the acceptable norms
+			//			//and if the horizontal input is within the acceptable norms
 			if (this.DoesInputSurpassJoystickErrorMargin (horizontal_rotation))
 			{
 				//then rotate the head about the y-axis
@@ -158,7 +171,7 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (message != "")
 		{
-			Debug.Log (message);
+		Debug.Log (message);
 		}
 		#endif
 	}
@@ -185,11 +198,11 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (controller_rise_input != 0.0f)
 		{
-			message += "X button detected\n";
+		message += "X button detected\n";
 		}
 		if (controller_lower_input != 0.0f)
 		{
-			message += "Square button detected\n";
+		message += "Square button detected\n";
 		}
 		#endif
 
@@ -197,11 +210,11 @@ public class InputManager : MonoBehaviour
 
 		//if any left joystick or button (X or Square) input is detected...
 		if (this.WasLeftJoystickInputDetectedAndValid (left_joystick_horizontal_input, left_joystick_vertical_input)
-		    || y_ward_input != 0.0f)
+			|| y_ward_input != 0.0f)
 		{
 			//if we're currently moving or at rest, and adding to the velocity won't surpass our speed limit...
 			if (this.m_CurrentVelocity >= 0.0f
-			    && this.m_CurrentVelocity + this.m_Acceleration * Time.fixedDeltaTime <= this.m_TerminalVelocity)
+				&& this.m_CurrentVelocity + this.m_Acceleration * Time.fixedDeltaTime <= this.m_TerminalVelocity)
 			{
 				//...then add to our current speed
 				this.m_CurrentVelocity += this.m_Acceleration * Time.fixedDeltaTime;
@@ -254,7 +267,7 @@ public class InputManager : MonoBehaviour
 			displacement_to_apply = this.ConvertDisplacementToBeCameraSubjective (displacement_to_apply);
 
 			//Apply transformation
-//			this.CheckForCollisionAndApplyDisplacementIfPossible(displacement_to_apply);
+			//			this.CheckForCollisionAndApplyDisplacementIfPossible(displacement_to_apply);
 			this.m_PlayerContainer.transform.position += displacement_to_apply;
 
 			this.m_CurrentDirection = Vector3.Normalize (displacement_to_apply);
@@ -281,13 +294,13 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (message != "")
 		{
-			Debug.Log (message);
+		Debug.Log (message);
 		}
 		#endif
 
 		#if TESTING_VELOCITY_RELATED
 		Debug.Log("Current velocity: " + this.m_CurrentVelocity + "\n"
-			+ "Acceleration: " + this.m_Acceleration);
+		+ "Acceleration: " + this.m_Acceleration);
 		#endif
 
 	}
@@ -314,7 +327,7 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (message != "")
 		{
-			Debug.Log (message);
+		Debug.Log (message);
 		}
 		#endif
 	}
@@ -328,8 +341,8 @@ public class InputManager : MonoBehaviour
 	private bool WasLeftJoystickInputDetectedAndValid (float left_joystick_horizontal_input, float left_joystick_vertical_input)
 	{
 		return((left_joystick_horizontal_input != 0.0f || left_joystick_vertical_input != 0.0f)
-		&& (this.DoesInputSurpassJoystickErrorMargin (left_joystick_horizontal_input)
-		|| this.DoesInputSurpassJoystickErrorMargin (left_joystick_vertical_input)));
+			&& (this.DoesInputSurpassJoystickErrorMargin (left_joystick_horizontal_input)
+				|| this.DoesInputSurpassJoystickErrorMargin (left_joystick_vertical_input)));
 	}
 
 	/**A function to return a vector that contains the input collected from the user, converted to a motion vector relative to the camera*/
@@ -353,9 +366,9 @@ public class InputManager : MonoBehaviour
 	{
 		int scenery_layermask = UnityEngine.LayerMask.NameToLayer (LAYER_SCENERY);
 
-//		Debug.Log ("Player container position: " + this.m_PlayerContainer.transform.position.x + ", "
-//			+ this.m_PlayerContainer.transform.position.y + ", "
-//			+ this.m_PlayerContainer.transform.position.z);
+		//		Debug.Log ("Player container position: " + this.m_PlayerContainer.transform.position.x + ", "
+		//			+ this.m_PlayerContainer.transform.position.y + ", "
+		//			+ this.m_PlayerContainer.transform.position.z);
 
 		foreach (RaycastHit hit in Physics.RaycastAll(this.m_BirdHead.gameObject.transform.position, displacement_to_apply, displacement_to_apply.magnitude * 25.0f))
 		{
@@ -372,9 +385,9 @@ public class InputManager : MonoBehaviour
 	private void FaceCurrentDirection ()
 	{
 		Vector3 new_direction = Vector3.RotateTowards (this.m_PlayerGameObject.transform.forward,
-			                        Vector3.Cross (Vector3.up, this.m_CurrentDirection),
-			                        this.m_MaximalBirdRotationVelocity * Time.fixedDeltaTime,
-			                        0.0F);
+			Vector3.Cross (Vector3.up, this.m_CurrentDirection),
+			this.m_MaximalBirdRotationVelocity * Time.fixedDeltaTime,
+			0.0F);
 		this.m_PlayerGameObject.transform.rotation = Quaternion.LookRotation (new_direction);
 
 	}
