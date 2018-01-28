@@ -6,7 +6,8 @@ public class head : MonoBehaviour
 {
 
 	//array of strings that correspong to the tags of the outter colliders of each flower
-	private string[] flowers = {"Flower0", "Flower1", "Flower2", "Flower3", "Flower4", "Flower5", "Flower6", "Flower7", "Flower8" };
+	private string[] flowers = {"Flower0", "Flower1", "Flower2", "Flower3", "Flower4", 
+	"Flower5", "Flower6", "Flower7", "Flower8", "selas" };
 
 	//public booleans to trigger the text in the introduction
 	public static bool intro_approach = false;
@@ -35,7 +36,7 @@ public class head : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-
+//	Debug.Log("Counter : " + beak.counter);
 		//if in intro
 		if (ApproachIntro) { 
 
@@ -69,6 +70,7 @@ public class head : MonoBehaviour
 	//When the HB collides with the flowers
 	void OnTriggerEnter (Collider theCollision){
 
+		Debug.Log("COLLISION");
 		//if the HB enters a close range of the FIRST CORRECT flower
 		if (theCollision.gameObject.tag == "intro_closer") {
 			ApproachIntro = true;

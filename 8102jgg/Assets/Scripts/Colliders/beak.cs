@@ -20,7 +20,7 @@ public class beak : MonoBehaviour {
 
 	// Use this for initialization
 	void Start () {
-		Debug.Log("BEAK SCRIPT CONNECT");
+//		Debug.Log("BEAK SCRIPT CONNECT");
 	}
 	
 	// Update is called once per frame
