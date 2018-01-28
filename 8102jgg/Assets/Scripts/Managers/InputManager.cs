@@ -1,15 +1,16 @@
 ﻿//#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
-//#define PS4_CONTROLLER
+#define PS4_CONTROLLER
 //Uncomment this macro if you're using a PS3 controller
-#define PS3_CONTROLLER
+//#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class InputManager : MonoBehaviour {
+public class InputManager : MonoBehaviour
+{
 
 	/**A reference to the gameobject containing all the player components (namely, the camera and the player gameobject).
 	*We apply translations to this gameobject and therefore move the player and camera simultaneously.*/
@@ -57,14 +58,15 @@ public class InputManager : MonoBehaviour {
 	public static readonly string LAYER_SCENERY = "Scenery";
 
 	// Update is called once per frame
-	void Update () {
+	void Update ()
+	{
 		this.ManagePlayerInputForMovement ();
 		this.ManagePlayerInputForCameraRotation ();
 
 	}
 
 	/**A function to manage movement with respect to user input.*/
-	private void ManagePlayerInputForMovement()
+	private void ManagePlayerInputForMovement ()
 	{
 		#if TESTING_INPUTS
 		string message = "";
@@ -94,11 +96,13 @@ public class InputManager : MonoBehaviour {
 		Vector3 displacement_to_apply = Vector3.zero;
 
 		//if any left joystick or button (X or Square) input is detected...
-		if (this.WasLeftJoystickInputDetectedAndValid(left_joystick_horizontal_input, left_joystick_vertical_input)
-			|| y_ward_input != 0.0f) {
+		if (this.WasLeftJoystickInputDetectedAndValid (left_joystick_horizontal_input, left_joystick_vertical_input)
+		    || y_ward_input != 0.0f)
+		{
 			//if we're currently moving or at rest, and adding to the velocity won't surpass our speed limit...
 			if (this.m_CurrentVelocity >= 0.0f
-			    && this.m_CurrentVelocity + this.m_Acceleration * Time.fixedDeltaTime <= this.m_TerminalVelocity) {
+			    && this.m_CurrentVelocity + this.m_Acceleration * Time.fixedDeltaTime <= this.m_TerminalVelocity)
+			{
 				//...then add to our current speed
 				this.m_CurrentVelocity += this.m_Acceleration * Time.fixedDeltaTime;
 			}
@@ -109,14 +113,16 @@ public class InputManager : MonoBehaviour {
 			float vertical_displacement = 0.0f;
 
 			//if there was specifically a horizontal input...
-			if (left_joystick_horizontal_input != 0.0f) {
+			if (left_joystick_horizontal_input != 0.0f)
+			{
 				#if TESTING_INPUTS
 				message += "Left joystick horizontal input detected\n";
 				#endif
 				horizontal_displacement = left_joystick_horizontal_input * this.m_CurrentVelocity;
 			}
 			//if there was specifically a vertical input...
-			if (left_joystick_vertical_input != 0.0f) {
+			if (left_joystick_vertical_input != 0.0f)
+			{
 				#if TESTING_INPUTS
 				message += "Left joystick vertical input detected\n";
 				#endif
@@ -128,7 +134,8 @@ public class InputManager : MonoBehaviour {
 
 			float y_ward_displacement = 0.0f;
 			//if there was either an upward or downward input...
-			if (y_ward_input != 0.0f) {
+			if (y_ward_input != 0.0f)
+			{
 				//if y_ward_input is positive, we go up
 				//else we go down
 				y_ward_displacement = y_ward_input * this.m_CurrentVelocity;
@@ -137,7 +144,8 @@ public class InputManager : MonoBehaviour {
 			//else if y_ward is either no input, or a combination of upward and downward inputs, do nothing.
 
 			//if the displacement to apply results in a movement that is faster than our maximal velocity, then clamp the velocity
-			if (displacement_to_apply.magnitude > this.m_TerminalVelocity) {
+			if (displacement_to_apply.magnitude > this.m_TerminalVelocity)
+			{
 				displacement_to_apply = Vector3.ClampMagnitude (displacement_to_apply, this.m_TerminalVelocity);
 			}
 			//Apply Time.fixedDeltaTime to make movement frame-rate independent
@@ -152,15 +160,18 @@ public class InputManager : MonoBehaviour {
 			this.m_CurrentDirection = Vector3.Normalize (displacement_to_apply);
 		}//end if
 		//else if no movement input is detected...
-		else {
-			if (this.m_CurrentVelocity > 0.0f) {
+		else
+		{
+			if (this.m_CurrentVelocity > 0.0f)
+			{
 				//...then decrease the current velocity
 				this.m_CurrentVelocity -= this.m_Acceleration * 5.0f * Time.fixedDeltaTime;
-				if (this.m_CurrentVelocity < 0.0f) {
+				if (this.m_CurrentVelocity < 0.0f)
+				{
 					this.m_CurrentVelocity = 0.0f;
 				}
 				//...and apply the displacement on the bird
-				this.m_PlayerContainer.transform.position += Vector3.ClampMagnitude(this.m_CurrentDirection, this.m_CurrentVelocity * Time.fixedDeltaTime);
+				this.m_PlayerContainer.transform.position += Vector3.ClampMagnitude (this.m_CurrentDirection, this.m_CurrentVelocity * Time.fixedDeltaTime);
 			}
 
 		}//end else
@@ -179,17 +190,19 @@ public class InputManager : MonoBehaviour {
 			+ "Acceleration: " + this.m_Acceleration);
 		#endif
 
-	}//end f'n void ManagePlayerInputForMovement()
+	}
+//end f'n void ManagePlayerInputForMovement()
 
 	/**A function to take care of rotating the camera with respect to player input*/
-	private void ManagePlayerInputForCameraRotation()
+	private void ManagePlayerInputForCameraRotation ()
 	{
 		#if TESTING_INPUTS
 		string message = "";
 		#endif
 		float rotation = Input.GetAxis (INPUT_CONTROLLER_RIGHTJOYSTICK_X);
 
-		if (rotation != 0.0f && this.DoesInputSurpassJoystickErrorMargin(rotation)) {
+		if (rotation != 0.0f && this.DoesInputSurpassJoystickErrorMargin (rotation))
+		{
 			#if TESTING_INPUTS
 			message += "Right joystick horizontal input detected.\n";
 			#endif
@@ -207,12 +220,12 @@ public class InputManager : MonoBehaviour {
 	}
 
 	/**Returns true if the given value valid with respect to the joystick error margin.*/
-	private bool DoesInputSurpassJoystickErrorMargin(float input)
+	private bool DoesInputSurpassJoystickErrorMargin (float input)
 	{
 		return -(this.m_ControllerJoystickErrorMargin) > input || input > this.m_ControllerJoystickErrorMargin;
 	}
 
-	private bool WasLeftJoystickInputDetectedAndValid(float left_joystick_horizontal_input, float left_joystick_vertical_input)
+	private bool WasLeftJoystickInputDetectedAndValid (float left_joystick_horizontal_input, float left_joystick_vertical_input)
 	{
 		return((left_joystick_horizontal_input != 0.0f || left_joystick_vertical_input != 0.0f)
 		&& (this.DoesInputSurpassJoystickErrorMargin (left_joystick_horizontal_input)
@@ -224,7 +237,7 @@ public class InputManager : MonoBehaviour {
 	{
 		Camera camera = this.m_PlayerContainer.transform.GetComponentInChildren<Camera> ();
 		Vector3 vector_to_return = Vector3.zero;
-		Vector3 x_plus = Vector3.ClampMagnitude(camera.transform.right, displacement_to_apply.x);
+		Vector3 x_plus = Vector3.ClampMagnitude (camera.transform.right, displacement_to_apply.x);
 		vector_to_return = new Vector3 (0.0f, displacement_to_apply.y, 0.0f);
 		vector_to_return = vector_to_return + x_plus;
 		Vector3 z_plus = camera.transform.forward;

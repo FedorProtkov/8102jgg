@@ -3,7 +3,12 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - stigma
+  - Flower1
+  - Flower2
+  - Flower3
+  - intro_closer
   layers:
   - Default
   - TransparentFX
