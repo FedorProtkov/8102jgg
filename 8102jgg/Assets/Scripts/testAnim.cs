@@ -16,12 +16,12 @@ public class testAnim : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
-		if (Input.GetKeyDown (KeyCode.C))
+		if (!head.flowerOpen && head.WrongApproached)
 		{
 			anim.SetTrigger ("close");
 		}
 		else
-		if (Input.GetKeyDown (KeyCode.O))
+			if (head.flowerOpen && !head.WrongApproached)
 		{
 			anim.SetTrigger ("open");
 			anim.SetTrigger ("idle");

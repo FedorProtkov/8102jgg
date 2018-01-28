@@ -35,6 +35,7 @@ GameObject:
   m_Component:
   - component: {fileID: 4343785914194570}
   - component: {fileID: 95605936928780264}
+  - component: {fileID: 114126414257173930}
   m_Layer: 0
   m_Name: Tulip
   m_TagString: Flower1
@@ -53,7 +54,7 @@ GameObject:
   - component: {fileID: 65689107652787588}
   m_Layer: 0
   m_Name: collider_connect
-  m_TagString: Flower1
+  m_TagString: Flower2
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -300,7 +301,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!1 &1673759527022614
 GameObject:
   m_ObjectHideFlags: 1
@@ -685,7 +686,7 @@ Transform:
   m_PrefabInternal: {fileID: 100100000}
   m_GameObject: {fileID: 1061184407322208}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -2.7144, y: 0.14, z: 4.0946}
+  m_LocalPosition: {x: -2.7144, y: 0.14, z: -8.83}
   m_LocalScale: {x: 1.4670547, y: 1.4670553, z: 1.4670553}
   m_Children:
   - {fileID: 4164377412107768}
@@ -757,7 +758,7 @@ Transform:
   m_GameObject: {fileID: 1079966396499788}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
   m_LocalPosition: {x: -0.044999953, y: 5.973512, z: -0.0098324865}
-  m_LocalScale: {x: 3.8836586, y: 3.8836598, z: 3.8836598}
+  m_LocalScale: {x: 4.9158063, y: 4.915807, z: 4.915807}
   m_Children: []
   m_Father: {fileID: 4343785914194570}
   m_RootOrder: 4
@@ -901,7 +902,7 @@ Animator:
   m_GameObject: {fileID: 1061184407322208}
   m_Enabled: 1
   m_Avatar: {fileID: 9000000, guid: 4149e737076f52c4e82d6c3259243a52, type: 3}
-  m_Controller: {fileID: 9100000, guid: 8e625824ac9e04299ae7e1810e657078, type: 2}
+  m_Controller: {fileID: 9100000, guid: 9b2f8d553f9c64091b5bf80b59296ab9, type: 2}
   m_CullingMode: 1
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
@@ -909,6 +910,18 @@ Animator:
   m_WarningMessage: 
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
+--- !u!114 &114126414257173930
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 100100000}
+  m_GameObject: {fileID: 1061184407322208}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c75e94a0aaf9f4607835de05609bd4e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  anim: {fileID: 0}
 --- !u!137 &137279421994689394
 SkinnedMeshRenderer:
   m_ObjectHideFlags: 1

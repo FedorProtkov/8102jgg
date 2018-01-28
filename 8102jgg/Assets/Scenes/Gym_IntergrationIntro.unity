@@ -218,23 +218,6 @@ Prefab:
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 9cb2c00bd322e40949af29a63643cf4c, type: 2}
   m_IsPrefabParent: 0
---- !u!1 &269689752 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1061184407322208, guid: 2075bc6eea8a84bd691913f244d5a7ed,
-    type: 2}
-  m_PrefabInternal: {fileID: 732431185}
---- !u!114 &269689755
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 269689752}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: c75e94a0aaf9f4607835de05609bd4e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  anim: {fileID: 0}
 --- !u!1001 &415924486
 Prefab:
   m_ObjectHideFlags: 0
@@ -473,11 +456,6 @@ Prefab:
       propertyPath: m_Name
       value: Tulip (1)
       objectReference: {fileID: 0}
-    - target: {fileID: 95605936928780264, guid: 2075bc6eea8a84bd691913f244d5a7ed,
-        type: 2}
-      propertyPath: m_Controller
-      value: 
-      objectReference: {fileID: 9100000, guid: 9b2f8d553f9c64091b5bf80b59296ab9, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}
   m_IsPrefabParent: 0
@@ -589,6 +567,19 @@ Prefab:
     - target: {fileID: 4343785914194570, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}
       propertyPath: m_RootOrder
       value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 95605936928780264, guid: 2075bc6eea8a84bd691913f244d5a7ed,
+        type: 2}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 8e625824ac9e04299ae7e1810e657078, type: 2}
+    - target: {fileID: 1079966396499788, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}
+      propertyPath: m_TagString
+      value: Flower1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1609005509095866, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}

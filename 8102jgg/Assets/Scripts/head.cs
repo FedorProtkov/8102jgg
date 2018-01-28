@@ -16,6 +16,8 @@ public class head : MonoBehaviour
 	//	public static bool intro_follow = false;
 	public static bool intro_wrongFlower = false;
 
+	public static bool flowerOpen = false;
+	public static bool WrongApproached = false;
 	//boolean that keeps track if the HB is close enough of the flower (it can be approach even more to drink nectar)
 	//this closeness trigggers the pulsating animation of the stigma
 	private bool closeEnough = false;
@@ -71,6 +73,7 @@ public class head : MonoBehaviour
 		if (theCollision.gameObject.tag == "intro_closer") {
 			ApproachIntro = true;
 			intro_wrongFlower = false;
+			WrongApproached = false;
 		}
 
 
@@ -79,7 +82,7 @@ public class head : MonoBehaviour
 			intro_wrongFlower = false;
 			//the HB is close enough to the flower and could proceed to drink nectar
 			closeEnough = true;
-
+			WrongApproached = false;
 			//ANIMATION : stigma starts to pulse, indicating to the player to come closer to the stigma
 
 
@@ -89,6 +92,9 @@ public class head : MonoBehaviour
 			intro_wrongFlower = true;
 			closeEnough = false;
 			ApproachIntro = false;
+
+			flowerOpen = false;
+			WrongApproached = true;
 		}
 	}
 
@@ -105,15 +111,17 @@ public class head : MonoBehaviour
 			intro_connect = false;
 			intro_closer = false;
 
-			//when the HB is no longer in close range of the WRONG flower
-		} else {
 
-			//ANIMATION : flower opens again
-		}
+			flowerOpen = false;
+			WrongApproached = false;
+			//when the HB is no longer in close range of the WRONG flower
+		} 
 
 		if (theCollision.gameObject.tag != flowers [beak.counter] || theCollision.gameObject.tag != "intro_closer" ){
 			intro_wrongFlower = false;
 			intro_approach = true;
+			flowerOpen = true;
+			WrongApproached = false;
 		}
 
 		if (theCollision.gameObject.tag == "intro_closer") {
