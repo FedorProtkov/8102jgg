@@ -29,6 +29,10 @@ public class PanCamera : MonoBehaviour
 	public Camera cam2;
 
 	float countdownToChange = 3.0f;
+
+	public AudioSource elementSource;
+	private bool playIntroSound = true;
+
 	//	public GameObject kodama;
 
 	//Used the following links as a reference
@@ -37,6 +41,7 @@ public class PanCamera : MonoBehaviour
 
 	void Start ()
 	{
+		elementSource = gameObject.AddComponent<AudioSource> ();
 		cam1.enabled = true;
 		cam2.enabled = false;
 		start = transform.position;
@@ -48,6 +53,12 @@ public class PanCamera : MonoBehaviour
 	// Update is called once per frame
 	void Update ()
 	{
+		if (playIntroSound)
+		{
+			Debug.Log ("playsound");
+			elementSource.PlayOneShot ((AudioClip)Resources.Load ("selas_intro_CLEANN"));
+			playIntroSound = false;
+		}
 		if (!cam2.enabled)
 		{
 			if (selectingUnits)
