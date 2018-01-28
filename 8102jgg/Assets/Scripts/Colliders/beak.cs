@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class beak : MonoBehaviour {
 
+	[SerializeField] private InputManager m_IM;
+
 	//variable that keeps that of which flower the HB must go to
 	public static int counter = 0;
 
@@ -40,7 +42,7 @@ public class beak : MonoBehaviour {
 			}
 
 			//if control is pressed
-			if (Input.GetKeyDown (KeyCode.Space) && !NectarCollected) {
+			if (this.m_IM.ReturnPollenationInput() && !NectarCollected) {
 				//if we are in the introduction of the game
 				if (counter == 0) {
 
