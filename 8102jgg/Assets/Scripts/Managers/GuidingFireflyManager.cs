@@ -11,6 +11,8 @@ public class GuidingFireflyManager : MonoBehaviour {
 
 	[SerializeField] List<GameObject> m_Flowers;
 
+	private int m_FlowerInt = 0;
+
 	private bool m_PlayerBeenCircled = false;
 
 	public float m_FireflyMovementSpeed;
@@ -23,29 +25,41 @@ public class GuidingFireflyManager : MonoBehaviour {
 	{
 		this.m_BCM = this.GetComponent<BeakColorManager> ();
 		this.m_PS = this.m_GuidingFirefly.GetComponent<ParticleSystem> ();
-		Color color = this.m_PS.main.startColor.color;
-		color = this.m_BCM.GetCurrentBeakColor();
-//		this.m_PS.main.startColor.color = color;
-
+		ParticleSystem.MainModule settings = this.m_PS.main;
+		settings.startColor = new ParticleSystem.MinMaxGradient(this.m_BCM.GetCurrentBeakColor ());
 	}
 
 	// Update is called once per frame
 	void Update () {
 		if (this.m_MainCamera.enabled) {
 			//go to next plant
+			this.ManageMovement();
+		}
 
-			//hover above plant
-
+		//Pollenate
+		if (Input.GetKeyDown (KeyCode.Space)) {
+			this.m_BCM.ChangeBeakColorToNextInSequence ();
+			this.ChaseNextFlower ();
 		}
 	}
 
 	private void ManageMovement()
 	{
-
+		if (this.m_GuidingFirefly.transform.position != this.m_Flowers [this.m_FlowerInt].transform.position + (Vector3.up * 5.0f)) {
+			this.m_GuidingFirefly.transform.position += Vector3.ClampMagnitude(this.m_Flowers[m_FlowerInt].transform.position + (Vector3.up * 10.0f) - this.m_GuidingFirefly.transform.position, this.m_FireflyMovementSpeed * Time.fixedDeltaTime);
+		}
 	}
 
-	private void CircleFlower()
+	private void ChaseNextFlower()
 	{
+		this.m_FlowerInt++;
+		ParticleSystem.MainModule settings = this.m_PS.main;
+		settings.startColor = new ParticleSystem.MinMaxGradient(this.m_BCM.GetCurrentBeakColor ());
+	}
 
+	public void Pollenate()
+	{
+		this.m_BCM.ChangeBeakColorToNextInSequence ();
+		this.ChaseNextFlower ();
 	}
 }

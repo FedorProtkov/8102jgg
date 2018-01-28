@@ -172,7 +172,7 @@ Prefab:
     - target: {fileID: 137279421994689394, guid: 2075bc6eea8a84bd691913f244d5a7ed,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 40f4c522a6b0f41b498a73642602f173, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}
@@ -348,7 +348,7 @@ Prefab:
     - target: {fileID: 23346393564426734, guid: d7551174fda0944269dbc0443e0425ce,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 248715b45c91fde4680a6232227db0fe, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7551174fda0944269dbc0443e0425ce, type: 2}
@@ -749,7 +749,7 @@ Prefab:
     - target: {fileID: 95968852452016352, guid: 8bdaf5442f04c405d8b3fff2b11d314e,
         type: 2}
       propertyPath: m_Controller
-      value: 
+      value:
       objectReference: {fileID: 9100000, guid: 6e8282e956d4a4877a5e0a8a6114eaa7, type: 2}
     - target: {fileID: 4167233424881818, guid: 8bdaf5442f04c405d8b3fff2b11d314e, type: 2}
       propertyPath: m_LocalScale.x
@@ -797,7 +797,7 @@ Animator:
   m_UpdateMode: 0
   m_ApplyRootMotion: 0
   m_LinearVelocityBlending: 0
-  m_WarningMessage: 
+  m_WarningMessage:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
 --- !u!1 &545192639
@@ -961,7 +961,7 @@ ParticleSystem:
   moveWithTransform: 0
   moveWithCustomTransform: {fileID: 0}
   scalingMode: 1
-  randomSeed: 1342310101
+  randomSeed: 1562679255
   InitialModule:
     serializedVersion: 3
     enabled: 1
@@ -4550,7 +4550,7 @@ Prefab:
     - target: {fileID: 23346393564426734, guid: d7551174fda0944269dbc0443e0425ce,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 08990baf722e0504e96c234a4e9147eb, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7551174fda0944269dbc0443e0425ce, type: 2}
@@ -4574,8 +4574,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: b73cf3a30a43f4368a5fc6ac1030b2e3, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
 --- !u!1 &1277691078 stripped
 GameObject:
   m_PrefabParentObject: {fileID: 1526260016533756, guid: 017a835713d8e44fa82b446e42d0abc3,
@@ -4729,7 +4729,7 @@ Prefab:
     - target: {fileID: 137279421994689394, guid: 2075bc6eea8a84bd691913f244d5a7ed,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 02617e32616a242fcb05ff7a01940620, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 2075bc6eea8a84bd691913f244d5a7ed, type: 2}
@@ -4809,7 +4809,7 @@ Prefab:
     - target: {fileID: 23346393564426734, guid: d7551174fda0944269dbc0443e0425ce,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 5ac45d9618736c3408ce2454cf130ab5, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: d7551174fda0944269dbc0443e0425ce, type: 2}
@@ -4843,8 +4843,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 6219990e0de944ff4b3185e3a1b5b7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   floor: 0.1
   ceiling: 0.85
   oscSpeed: 0.5
@@ -4941,8 +4941,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cc61be95b9a874430a81fd3b6da2f97f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   transitionDuration: 5900
   targetObject: {fileID: 758419411}
   adjustX: -9.21
@@ -5244,8 +5244,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1d1920fc1b9a240ef9792fa68947b49d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_PlayerContainer: {fileID: 787964925}
   m_PlayerGameObject: {fileID: 1535389041}
   m_BirdHead: {fileID: 2092440917}
@@ -5266,8 +5266,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cd1e18c71845642be998211c23cc074f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_Bird: {fileID: 1535389041}
   floor: 0.3
   ceiling: 0.8
@@ -5281,8 +5281,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 718aefc809a914e0fa7b1d6d0c64c2c1, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
+  m_Name:
+  m_EditorClassIdentifier:
   m_GuidingFirefly: {fileID: 565376144}
   m_Player: {fileID: 1535389041}
   m_MainCamera: {fileID: 1558398912}
@@ -5297,7 +5297,7 @@ MonoBehaviour:
   - {fileID: 1616774093}
   - {fileID: 529834578}
   - {fileID: 648900394}
-  m_FireflyMovementSpeed: 0
+  m_FireflyMovementSpeed: 8
 --- !u!1001 &1685185352
 Prefab:
   m_ObjectHideFlags: 0
@@ -5402,7 +5402,7 @@ Prefab:
     - target: {fileID: 137522559887448896, guid: 017a835713d8e44fa82b446e42d0abc3,
         type: 2}
       propertyPath: m_Materials.Array.data[0]
-      value: 
+      value:
       objectReference: {fileID: 2100000, guid: 4bdb7d5b3dabf8a4288b919fb2821d2b, type: 2}
     m_RemovedComponents: []
   m_ParentPrefab: {fileID: 100100000, guid: 017a835713d8e44fa82b446e42d0abc3, type: 2}
