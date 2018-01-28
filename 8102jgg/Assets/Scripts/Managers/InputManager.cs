@@ -79,11 +79,13 @@ public class InputManager : MonoBehaviour
 		this.FaceCurrentDirection ();
 
 		//If the player isn't holding down the RT, then the right joystick allows them to rotate the camera
-		if (!m_IsFocused) {
+		if (!m_IsFocused)
+		{
 			this.ManagePlayerInputForCameraRotation ();
 		} 
 		//else if the player is holding down RT, then the right joystick allows them to rotate the beak
-		else {
+		else
+		{
 			this.ManageBeakRotation ();
 		}
 	}
@@ -93,7 +95,7 @@ public class InputManager : MonoBehaviour
 	{
 		#if PS3_CONTROLLER
 		m_IsFocused = Input.GetButton (INPUT_CONTROLLER_BUTTON_RT);
-		#elif
+		#elif PS4_CONTROLLER
 		#endif
 	}
 
@@ -111,17 +113,19 @@ public class InputManager : MonoBehaviour
 		if (horizontal_rotation != 0.0f || vertical_rotation != 0.0f)
 		{
 //			//and if the horizontal input is within the acceptable norms
-			if (this.DoesInputSurpassJoystickErrorMargin (horizontal_rotation)) {
+			if (this.DoesInputSurpassJoystickErrorMargin (horizontal_rotation))
+			{
 				//then rotate the head about the y-axis
-				this.m_BirdHead.transform.Rotate(new Vector3(-(this.m_BeakRotationSpeed * horizontal_rotation * Time.fixedDeltaTime), 0.0f, 0.0f));
+				this.m_BirdHead.transform.Rotate (new Vector3 (-(this.m_BeakRotationSpeed * horizontal_rotation * Time.fixedDeltaTime), 0.0f, 0.0f));
 				#if TESTING_INPUTS
 				message += "Right joystick horizontal input detected.\n";
 				#endif
 			}
 			//and if the vertical input is within the acceptable norms
-			if (this.DoesInputSurpassJoystickErrorMargin (vertical_rotation)) {
+			if (this.DoesInputSurpassJoystickErrorMargin (vertical_rotation))
+			{
 				//then rotate the head about the y-axis
-				this.m_BirdHead.transform.Rotate(new Vector3(0.0f, 0.0f, this.m_BeakRotationSpeed * vertical_rotation * Time.fixedDeltaTime));
+				this.m_BirdHead.transform.Rotate (new Vector3 (0.0f, 0.0f, this.m_BeakRotationSpeed * vertical_rotation * Time.fixedDeltaTime));
 				#if TESTING_INPUTS
 				message += "Right joystick vertical input detected.\n";
 				#endif
@@ -131,7 +135,7 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (message != "")
 		{
-			Debug.Log(message);
+			Debug.Log (message);
 		}
 		#endif
 	}
@@ -156,10 +160,12 @@ public class InputManager : MonoBehaviour
 		float y_ward_input = controller_rise_input + controller_lower_input;
 
 		#if TESTING_INPUTS
-		if (controller_rise_input != 0.0f){
-			message += "X button detected\n" ;
+		if (controller_rise_input != 0.0f)
+		{
+			message += "X button detected\n";
 		}
-		if (controller_lower_input != 0.0f) {
+		if (controller_lower_input != 0.0f)
+		{
 			message += "Square button detected\n";
 		}
 		#endif
@@ -252,7 +258,7 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (message != "")
 		{
-			Debug.Log(message);
+			Debug.Log (message);
 		}
 		#endif
 
@@ -285,7 +291,7 @@ public class InputManager : MonoBehaviour
 		#if TESTING_INPUTS
 		if (message != "")
 		{
-			Debug.Log(message);
+			Debug.Log (message);
 		}
 		#endif
 	}
