@@ -1,9 +1,9 @@
 ﻿//#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
-//#define PS4_CONTROLLER
+#define PS4_CONTROLLER
 //Uncomment this macro if you're using a PS3 controller
-#define PS3_CONTROLLER
+//#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
@@ -196,7 +196,7 @@ public class InputManager : MonoBehaviour
 		#endif
 
 	}
-//end f'n void ManagePlayerInputForMovement()
+	//end f'n void ManagePlayerInputForMovement()
 
 	/**A function to take care of rotating the camera with respect to player input*/
 	private void ManagePlayerInputForCameraRotation ()
@@ -254,7 +254,7 @@ public class InputManager : MonoBehaviour
 
 	/**A function to check to see whether applying a given displacement to the bird leads to a collision.
 	*If so, the displacement is not applied.*/
-	private void CheckForCollisionAndApplyDisplacementIfPossible(Vector3 displacement_to_apply)
+	private void CheckForCollisionAndApplyDisplacementIfPossible (Vector3 displacement_to_apply)
 	{
 		int scenery_layermask = UnityEngine.LayerMask.NameToLayer (LAYER_SCENERY);
 
@@ -262,8 +262,10 @@ public class InputManager : MonoBehaviour
 //			+ this.m_PlayerContainer.transform.position.y + ", "
 //			+ this.m_PlayerContainer.transform.position.z);
 
-		foreach (RaycastHit hit in Physics.RaycastAll(this.m_BirdHead.gameObject.transform.position, displacement_to_apply, displacement_to_apply.magnitude * 25.0f)) {
-			if (hit.collider.gameObject.layer == UnityEngine.LayerMask.NameToLayer ("Scenery")) {
+		foreach (RaycastHit hit in Physics.RaycastAll(this.m_BirdHead.gameObject.transform.position, displacement_to_apply, displacement_to_apply.magnitude * 25.0f))
+		{
+			if (hit.collider.gameObject.layer == UnityEngine.LayerMask.NameToLayer ("Scenery"))
+			{
 				Debug.Log ("Hit scenery element " + hit.collider.gameObject.name);
 				this.m_CurrentVelocity = 0.0f;
 				return;
@@ -272,10 +274,10 @@ public class InputManager : MonoBehaviour
 		this.m_PlayerContainer.transform.position += displacement_to_apply;
 	}
 
-	private void FaceCurrentDirection()
+	private void FaceCurrentDirection ()
 	{
 		Vector3 new_direction = Vector3.RotateTowards (this.m_PlayerGameObject.transform.forward,
-									Vector3.Cross(Vector3.up, this.m_CurrentDirection),
+			                        Vector3.Cross (Vector3.up, this.m_CurrentDirection),
 			                        this.m_MaximalBirdRotationVelocity * Time.fixedDeltaTime,
 			                        0.0F);
 		this.m_PlayerGameObject.transform.rotation = Quaternion.LookRotation (new_direction);
