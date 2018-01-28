@@ -1,9 +1,9 @@
 ﻿//#define TESTING_INPUTS
 //#define TESTING_VELOCITY_RELATED
 //Uncomment this macro if you're using a PS4 controller
-#define PS4_CONTROLLER
+//#define PS4_CONTROLLER
 //Uncomment this macro if you're using a PS3 controller
-//#define PS3_CONTROLLER
+#define PS3_CONTROLLER
 
 using System.Collections;
 using System.Collections.Generic;
@@ -17,6 +17,9 @@ public class InputManager : MonoBehaviour
 	[SerializeField] GameObject m_PlayerContainer;
 	/**A reference to the actual player gameobject*/
 	[SerializeField] GameObject m_PlayerGameObject;
+	/**A reference to the bird's head gameobject*/
+	[SerializeField] GameObject m_BirdHead;
+
 
 	/**A variable we need to introduce to account for my shitty controller. As it is, we have small issues with the sensitivity of the joysticks.
 	*This value will therefore be what the input of a given joystick needs to be greater than in order to be considered valid input.
@@ -34,6 +37,12 @@ public class InputManager : MonoBehaviour
 	private Vector3 m_CurrentDirection = Vector3.zero;
 	/**The maximal speed at which the player can rotate the camera about the y-axis*/
 	public float m_MaximalRotationSpeed;
+	/**The maximal speed at which the birds rotates as a consequence of player movement.*/
+	private float m_CurrentBirdRotationVelocity = 0.0f;
+
+	public float m_MaximalBirdRotationVelocity;
+	/**The rate at which the bird reaches the maximal rotation speed.*/
+	public float m_RotationAcceleration;
 
 	/**The name of the input axis responsible for the horizontal component of the left joystick*/
 	public static readonly string INPUT_CONTROLLER_LEFTJOYSTICK_X = "Left Joystick X";
@@ -50,12 +59,15 @@ public class InputManager : MonoBehaviour
 	/**The name of the input button corresponding to the PS4 controller square button*/
 	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_SQUARE = "PS4 Controller Square";
 
+	/**The layer containing all objects belonging to the scene that specifically cannot be passed through.*/
+	public static readonly string LAYER_SCENERY = "Scenery";
+
 	// Update is called once per frame
 	void Update ()
 	{
 		this.ManagePlayerInputForMovement ();
 		this.ManagePlayerInputForCameraRotation ();
-
+		this.FaceCurrentDirection ();
 	}
 
 	/**A function to manage movement with respect to user input.*/
@@ -147,6 +159,7 @@ public class InputManager : MonoBehaviour
 			displacement_to_apply = this.ConvertDisplacementToBeCameraSubjective (displacement_to_apply);
 
 			//Apply transformation
+//			this.CheckForCollisionAndApplyDisplacementIfPossible(displacement_to_apply);
 			this.m_PlayerContainer.transform.position += displacement_to_apply;
 
 			this.m_CurrentDirection = Vector3.Normalize (displacement_to_apply);
@@ -224,6 +237,7 @@ public class InputManager : MonoBehaviour
 		|| this.DoesInputSurpassJoystickErrorMargin (left_joystick_vertical_input)));
 	}
 
+	/**A function to return a vector that contains the input collected from the user, converted to a motion vector relative to the camera*/
 	private Vector3 ConvertDisplacementToBeCameraSubjective (Vector3 displacement_to_apply)
 	{
 		Camera camera = this.m_PlayerContainer.transform.GetComponentInChildren<Camera> ();
@@ -236,5 +250,35 @@ public class InputManager : MonoBehaviour
 		z_plus = Vector3.ClampMagnitude (z_plus, displacement_to_apply.z);
 		vector_to_return = vector_to_return + z_plus;
 		return vector_to_return;
+	}
+
+	/**A function to check to see whether applying a given displacement to the bird leads to a collision.
+	*If so, the displacement is not applied.*/
+	private void CheckForCollisionAndApplyDisplacementIfPossible(Vector3 displacement_to_apply)
+	{
+		int scenery_layermask = UnityEngine.LayerMask.NameToLayer (LAYER_SCENERY);
+
+//		Debug.Log ("Player container position: " + this.m_PlayerContainer.transform.position.x + ", "
+//			+ this.m_PlayerContainer.transform.position.y + ", "
+//			+ this.m_PlayerContainer.transform.position.z);
+
+		foreach (RaycastHit hit in Physics.RaycastAll(this.m_BirdHead.gameObject.transform.position, displacement_to_apply, displacement_to_apply.magnitude * 25.0f)) {
+			if (hit.collider.gameObject.layer == UnityEngine.LayerMask.NameToLayer ("Scenery")) {
+				Debug.Log ("Hit scenery element " + hit.collider.gameObject.name);
+				this.m_CurrentVelocity = 0.0f;
+				return;
+			}
+		}
+		this.m_PlayerContainer.transform.position += displacement_to_apply;
+	}
+
+	private void FaceCurrentDirection()
+	{
+		Vector3 new_direction = Vector3.RotateTowards (this.m_PlayerGameObject.transform.forward,
+									Vector3.Cross(Vector3.up, this.m_CurrentDirection),
+			                        this.m_MaximalBirdRotationVelocity * Time.fixedDeltaTime,
+			                        0.0F);
+		this.m_PlayerGameObject.transform.rotation = Quaternion.LookRotation (new_direction);
+
 	}
 }
