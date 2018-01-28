@@ -26,7 +26,7 @@ RenderSettings:
   m_AmbientIntensity: 1
   m_AmbientMode: 0
   m_SubtractiveShadowColor: {r: 0.42, g: 0.478, b: 0.627, a: 1}
-  m_SkyboxMaterial: {fileID: 10304, guid: 0000000000000000f000000000000000, type: 0}
+  m_SkyboxMaterial: {fileID: 2100000, guid: f17fac6f9be9c4e49bb1f68851be5462, type: 2}
   m_HaloStrength: 0.5
   m_FlareStrength: 1
   m_FlareFadeSpeed: 3
@@ -38,12 +38,12 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 0.44657868, g: 0.49641263, b: 0.57481706, a: 1}
+  m_IndirectSpecularColor: {r: 0.2839483, g: 0.29383624, b: 0.38515013, a: 1}
 --- !u!157 &3
 LightmapSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 11
-  m_GIWorkflowMode: 0
+  m_GIWorkflowMode: 1
   m_GISettings:
     serializedVersion: 2
     m_BounceScale: 1
@@ -89,7 +89,8 @@ LightmapSettings:
     m_PVRFilteringAtrousPositionSigmaIndirect: 2
     m_PVRFilteringAtrousPositionSigmaAO: 1
     m_ShowResolutionOverlay: 1
-  m_LightingDataAsset: {fileID: 0}
+  m_LightingDataAsset: {fileID: 112000002, guid: def3812d98983497bb8fa05d0cd1fa71,
+    type: 2}
   m_UseShadowmask: 1
 --- !u!196 &4
 NavMeshSettings:
@@ -948,7 +949,7 @@ Light:
   m_Enabled: 1
   serializedVersion: 8
   m_Type: 1
-  m_Color: {r: 1, g: 0, b: 0.35172415, a: 0.828}
+  m_Color: {r: 0.9558824, g: 0.82233995, b: 0.8693101, a: 0.828}
   m_Intensity: 1.8
   m_Range: 10
   m_SpotAngle: 30
@@ -1310,26 +1311,6 @@ GameObject:
   m_PrefabParentObject: {fileID: 1999972363579674, guid: f08ea36ff19634a449320f1a09f20b3b,
     type: 2}
   m_PrefabInternal: {fileID: 1674618398}
---- !u!1 &1574240825 stripped
-GameObject:
-  m_PrefabParentObject: {fileID: 1111104457936328, guid: f08ea36ff19634a449320f1a09f20b3b,
-    type: 2}
-  m_PrefabInternal: {fileID: 1674618398}
---- !u!114 &1574240828
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_PrefabParentObject: {fileID: 0}
-  m_PrefabInternal: {fileID: 0}
-  m_GameObject: {fileID: 1574240825}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 6219990e0de944ff4b3185e3a1b5b7ca, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  floor: 0.1
-  ceiling: 0.85
-  oscSpeed: 0.5
-  beakColor: {r: 0.18030927, g: 0.7905306, b: 0.8455882, a: 1}
 --- !u!1 &1593313385
 GameObject:
   m_ObjectHideFlags: 0
@@ -1502,6 +1483,7 @@ GameObject:
   m_Component:
   - component: {fileID: 1679236166}
   - component: {fileID: 1679236167}
+  - component: {fileID: 1679236168}
   m_Layer: 0
   m_Name: SceneManagers
   m_TagString: Untagged
@@ -1535,7 +1517,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerContainer: {fileID: 787964925}
   m_PlayerGameObject: {fileID: 1535389041}
-  m_BirdHead: {fileID: 0}
+  m_BirdHead: {fileID: 2092440917}
   m_ControllerJoystickErrorMargin: 0.2
   m_UnfocusTerminalVelocity: 50
   m_FocusTerminalVelocity: 7.5
@@ -1543,7 +1525,22 @@ MonoBehaviour:
   m_MaximalRotationSpeed: 100
   m_MaximalBirdRotationVelocity: 1.5
   m_RotationAcceleration: 0
-  m_BeakRotationSpeed: 0
+  m_BeakRotationSpeed: 2500
+--- !u!114 &1679236168
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_PrefabParentObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1679236165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: cd1e18c71845642be998211c23cc074f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Bird: {fileID: 1535389041}
+  floor: 0.3
+  ceiling: 0.8
+  oscSpeed: 0.3
 --- !u!1001 &1685185352
 Prefab:
   m_ObjectHideFlags: 0
@@ -1653,3 +1650,8 @@ Transform:
   m_PrefabParentObject: {fileID: 4417749887763710, guid: 017a835713d8e44fa82b446e42d0abc3,
     type: 2}
   m_PrefabInternal: {fileID: 1807594433}
+--- !u!1 &2092440917 stripped
+GameObject:
+  m_PrefabParentObject: {fileID: 1168219706186254, guid: f08ea36ff19634a449320f1a09f20b3b,
+    type: 2}
+  m_PrefabInternal: {fileID: 1674618398}

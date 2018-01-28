@@ -7,11 +7,11 @@ public class testBeakColor : MonoBehaviour
 	public float floor = 0.3f;
 	public float ceiling = 1.0f;
 	public float oscSpeed = 1.0f;
-	public Color beakColor;
+	private Color beakColor;
 	// Use this for initialization
 	void Start ()
 	{
-		
+		this.beakColor = Color.cyan;
 	}
 	
 	// Update is called once per frame
@@ -19,10 +19,6 @@ public class testBeakColor : MonoBehaviour
 	{
 		Renderer renderer = GetComponent<Renderer> ();
 		Material mat = renderer.material;
-//		if (Input.GetKeyDown (KeyCode.Z))
-//		{
-			
-
 		float emission = floor + Mathf.PingPong (Time.time * oscSpeed, ceiling - floor);
 //		float emission = Mathf.PingPong (Time.time, 1.0f);
 		Color baseColor = beakColor; //Replace this with whatever you want for your base color at emission level '1'
@@ -30,6 +26,10 @@ public class testBeakColor : MonoBehaviour
 		Color finalColor = baseColor * Mathf.LinearToGammaSpace (emission);
 
 		mat.SetColor ("_EmissionColor", finalColor);
-//		}
+	}
+
+	public void ChangeBeakColor(Color color)
+	{
+		this.beakColor = color;
 	}
 }
