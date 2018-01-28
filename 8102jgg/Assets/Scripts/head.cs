@@ -98,6 +98,7 @@ public class head : MonoBehaviour
 			intro_wrongFlower = false;
 			closeEnough = false;
 			intro_connect = false;
+			intro_closer = false;
 
 			//when the HB is no longer in close range of the WRONG flower
 		} else {
@@ -107,7 +108,10 @@ public class head : MonoBehaviour
 
 
 		if (theCollision.gameObject.tag == "intro_closer") {
-		ApproachIntro = false;
+			
+			ApproachIntro = false;
+			intro_approach = true;
+			intro_closer = false;
 		}
 	}
 }
