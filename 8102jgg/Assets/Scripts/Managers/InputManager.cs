@@ -61,6 +61,8 @@ public class InputManager : MonoBehaviour
 	public static readonly string INPUT_CONTROLLER_BUTTON_X = "Controller X";
 	/**The name of the input button corresponding to the controller square button*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_SQUARE = "Controller Square";
+	/**The name of the input button corresponding to the controller square button*/
+	public static readonly string INPUT_CONTROLLER_BUTTON_CIRCLE = "PS3 Controller Circle";
 	/**The name of the input button corresponding to the ps3 controller RT*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_RT = "PS3 Controller RT";
 	/**The name of the input button corresponding to the PS4 controller X button*/
