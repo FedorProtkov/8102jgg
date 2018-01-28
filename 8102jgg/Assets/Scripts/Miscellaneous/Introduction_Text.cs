@@ -25,7 +25,7 @@ public class Introduction_Text : MonoBehaviour
 	{
 
 		//if the player is wondering for what to do first
-		if (beak.counter <= 1) {
+		if (beak.counter <=1) {
 
 			//we are in introduction mode
 			introduction = true;
@@ -81,6 +81,8 @@ public class Introduction_Text : MonoBehaviour
 				//display the message
 				intro.text = messages [5];
 			}
+		}else{
+		intro.text = "";
 		}
 
 	}
