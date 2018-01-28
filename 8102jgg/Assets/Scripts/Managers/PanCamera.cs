@@ -6,6 +6,8 @@ public class PanCamera : MonoBehaviour
 {
 	public float transitionDuration = 2.5f;
 
+
+	public static bool STARTEXT = false;
 	public Transform targetObject;
 
 	private Vector3 start;
@@ -79,6 +81,8 @@ public class PanCamera : MonoBehaviour
 				//when countdown is less than or equal to zero
 				if (countdownToChange <= 0.0f)
 				{
+
+				STARTEXT = true;
 					playGameSound = true;
 					if (playGameSound)
 					{

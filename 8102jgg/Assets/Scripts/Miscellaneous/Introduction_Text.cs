@@ -25,7 +25,7 @@ public class Introduction_Text : MonoBehaviour
 	{
 
 		//if the player is wondering for what to do first
-		if (beak.counter <=1) {
+		if (beak.counter <=1 && PanCamera.STARTEXT) {
 
 			//we are in introduction mode
 			introduction = true;
