@@ -31,7 +31,11 @@ public class PanCamera : MonoBehaviour
 	float countdownToChange = 3.0f;
 
 	public AudioSource elementSource;
+	public AudioSource elementSource1;
+
 	private bool playIntroSound = true;
+	private bool playGameSound = false;
+
 
 	//	public GameObject kodama;
 
@@ -42,6 +46,8 @@ public class PanCamera : MonoBehaviour
 	void Start ()
 	{
 		elementSource = gameObject.AddComponent<AudioSource> ();
+		elementSource1 = gameObject.AddComponent<AudioSource> ();
+
 		cam1.enabled = true;
 		cam2.enabled = false;
 		start = transform.position;
@@ -73,6 +79,14 @@ public class PanCamera : MonoBehaviour
 				//when countdown is less than or equal to zero
 				if (countdownToChange <= 0.0f)
 				{
+					playGameSound = true;
+					if (playGameSound)
+					{
+						elementSource1.PlayOneShot ((AudioClip)Resources.Load ("atmosphere"));
+//						elementSource1.loop;
+						playGameSound = false;
+					}
+
 					cam1.enabled = !cam1.enabled;
 //				StartCoroutine (this.WasteTimeBeforeCameraTransition (20.0f));
 					cam2.enabled = !cam2.enabled;
