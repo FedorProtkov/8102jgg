@@ -9,6 +9,13 @@ TagManager:
   - Flower2
   - Flower3
   - intro_closer
+  - Flower4
+  - Flower5
+  - Flower6
+  - Flower7
+  - Flower8
+  - Flower0
+  - selas
   layers:
   - Default
   - TransparentFX
