@@ -509,10 +509,13 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_PlayerContainer: {fileID: 787964925}
   m_PlayerGameObject: {fileID: 1535389041}
+  m_BirdHead: {fileID: 0}
   m_ControllerJoystickErrorMargin: 0.2
   m_TerminalVelocity: 10
   m_Acceleration: 12
   m_MaximalRotationSpeed: 100
+  m_MaximalBirdRotationVelocity: 0.00001
+  m_RotationAcceleration: 0
 --- !u!1 &1703855234
 GameObject:
   m_ObjectHideFlags: 0

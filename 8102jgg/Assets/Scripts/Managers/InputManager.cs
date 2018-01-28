@@ -39,6 +39,8 @@ public class InputManager : MonoBehaviour
 	public float m_MaximalRotationSpeed;
 	/**The maximal speed at which the birds rotates as a consequence of player movement.*/
 	private float m_CurrentBirdRotationVelocity = 0.0f;
+
+	public float m_MaximalBirdRotationVelocity;
 	/**The rate at which the bird reaches the maximal rotation speed.*/
 	public float m_RotationAcceleration;
 
@@ -272,36 +274,11 @@ public class InputManager : MonoBehaviour
 
 	private void FaceCurrentDirection()
 	{
-		float acceptable_margin = 0.05f;
-		float dot_product = Vector3.Dot (this.m_PlayerGameObject.transform.forward, this.m_CurrentDirection);
-		//if the dot product is beyond acceptable margin...
-		if (Mathf.Abs(1 - dot_product) > acceptable_margin) {
-			//...adjust the direction in which the bird's facing
+		Vector3 new_direction = Vector3.RotateTowards (this.m_PlayerGameObject.transform.forward,
+									Vector3.Cross(Vector3.up, this.m_CurrentDirection),
+			                        this.m_MaximalBirdRotationVelocity * Time.fixedDeltaTime,
+			                        0.0F);
+		this.m_PlayerGameObject.transform.rotation = Quaternion.LookRotation (new_direction);
 
-			if (this.m_CurrentBirdRotationVelocity == 0.0f) {
-				//find the angle we need to get to
-				float angle = Vector3.Angle(this.m_PlayerGameObject.transform.forward, this.m_CurrentDirection);
-			}
-			//...adjust the direction in which the bird's facing
-			float angle = Vector3.Angle(this.m_PlayerGameObject.transform.forward, this.m_CurrentDirection);
-		}
-		//else if no movement input is detected...
-		else
-		{
-			if (this.m_CurrentBirdRotationVelocity > 0.0f)
-			{
-				//...then decrease the current velocity
-				this.m_CurrentBirdRotationVelocity -= this.m_RotationAcceleration * 5.0f * Time.fixedDeltaTime;
-				if (this.m_CurrentBirdRotationVelocity < 0.0f)
-				{
-					this.m_CurrentBirdRotationVelocity = 0.0f;
-				}
-				//...and apply the rotation on the bird
-//				+= Vector3.ClampMagnitude (this.m_CurrentDirection, this.m_CurrentVelocity * Time.fixedDeltaTime);
-				Vector3 euler_angles = this.m_PlayerContainer.transform.rotation.eulerAngles;
-				this.m_PlayerContainer.transform.Rotate(
-			}
-
-		}//end else
 	}
 }
