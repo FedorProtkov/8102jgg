@@ -4,7 +4,15 @@ using UnityEngine;
 
 public class PanCamera : MonoBehaviour
 {
-	public float transitionDuration = 2.5f;
+
+	[SerializeField] GameObject Selas;
+	private CanvasGroup m_CG;
+
+	public float transitionDuration;
+	public float m_FadeInDuration;
+	private float m_AlphaIncrements;
+
+	private Animator m_Animator;
 
 	public Transform targetObject;
 
@@ -42,12 +50,23 @@ public class PanCamera : MonoBehaviour
 		start = transform.position;
 		target = targetObject.transform.position;
 		target = new Vector3 (target.x + adjustX, target.y + adjustY, target.z - adjustZ);
+		this.m_CG = this.GetComponentInChildren<CanvasGroup> ();
+		this.m_CG.alpha = 1.0f;
+		this.m_AlphaIncrements = (1.0f / this.m_FadeInDuration) * Time.fixedDeltaTime;
+
+		this.m_Animator = this.Selas.GetComponent<Animator> ();
 //		loadScene_Button.reload ();
 	}
 
 	// Update is called once per frame
 	void Update ()
 	{
+		if (this.m_CG.alpha > 0.0f) {
+			this.m_CG.alpha -= this.m_AlphaIncrements;
+			this.m_Animator.SetBool ("FadeInComplete", !(this.m_CG.alpha > 0.0f));
+			return;
+		}
+
 		if (!cam2.enabled)
 		{
 			if (selectingUnits)
