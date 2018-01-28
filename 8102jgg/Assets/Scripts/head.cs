@@ -114,7 +114,7 @@ public class head : MonoBehaviour
 
 			flowerOpen = false;
 			WrongApproached = false;
-			//when the HB is no longer in close range of the WRONG flower
+
 		} 
 
 		if (theCollision.gameObject.tag != flowers [beak.counter] || theCollision.gameObject.tag != "intro_closer" ){
