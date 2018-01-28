@@ -26,9 +26,12 @@ public class InputManager : MonoBehaviour
 	*i.e. if [m_ControllerJoystickErrorMargin] = 0.1, then input must be (input < -(0.1) || 0.1 > input).*/
 	public float m_ControllerJoystickErrorMargin;
 
+	public float m_UnfocusTerminalVelocity;
+	public float m_FocusTerminalVelocity;
+
 	/**The maximal speed at which the player can move (this serves as an upper-bound).
 	*This velocity is independent of the y-bound velocity, and serves only to limit x- and z-ward motion.*/
-	public float m_TerminalVelocity;
+	private float m_TerminalVelocity;
 	/**The current speed at which the player is moving.*/
 	private float m_CurrentVelocity = 0.0f;
 	/**The rate at which the bird reaches the terminal velocity.*/
@@ -70,20 +73,42 @@ public class InputManager : MonoBehaviour
 
 	public static bool m_IsFocused = false;
 
+	void Start()
+	{
+		this.m_TerminalVelocity = this.m_UnfocusTerminalVelocity;
+	}
+
 	// Update is called once per frame
 	void LateUpdate ()
 	{
 		this.ManageFocusTrigger ();
 
 		this.ManagePlayerInputForMovement ();
-		this.FaceCurrentDirection ();
 
-		//If the player isn't holding down the RT, then the right joystick allows them to rotate the camera
+		/*
+		 * If the player is NOT holding down the RT (focus), then:
+		 * 	- enable camera manipulation via right joystick
+		 * 	- enable player facing in current direction of motion
+		 * 	- ensure value of terminal velocity is set to be greater, to allow for quicker movement about the scene
+		*/
 		if (!m_IsFocused) {
+			if (this.m_TerminalVelocity != this.m_UnfocusTerminalVelocity) {
+				this.m_TerminalVelocity = this.m_UnfocusTerminalVelocity;
+			}
 			this.ManagePlayerInputForCameraRotation ();
+			this.FaceCurrentDirection ();
 		} 
-		//else if the player is holding down RT, then the right joystick allows them to rotate the beak
+		/*
+		 * Else if the player IS holding down the RT (focus), then:
+		 * 	- disable camera manipulation
+		 * 	- enable beak rotation via right joystick
+		 * 	- disable player facing in current direction of motion
+		 * 	- ensure value of terminal velocity to be slower, to allow for greater precision
+		*/
 		else {
+			if (this.m_TerminalVelocity != this.m_FocusTerminalVelocity) {
+				this.m_TerminalVelocity = this.m_FocusTerminalVelocity;
+			}
 			this.ManageBeakRotation ();
 		}
 	}

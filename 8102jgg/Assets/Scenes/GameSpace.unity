@@ -528,7 +528,8 @@ MonoBehaviour:
   m_PlayerGameObject: {fileID: 1535389041}
   m_BirdHead: {fileID: 139241270}
   m_ControllerJoystickErrorMargin: 0.2
-  m_TerminalVelocity: 10
+  m_UnfocusTerminalVelocity: 50
+  m_FocusTerminalVelocity: 7.5
   m_Acceleration: 12
   m_MaximalRotationSpeed: 100
   m_MaximalBirdRotationVelocity: 1.5
