@@ -85,6 +85,11 @@ public class head : MonoBehaviour
 
 		}
 
+		if (theCollision.gameObject.tag != flowers [beak.counter] && theCollision.gameObject.tag != "intro_closer" ){
+			intro_wrongFlower = true;
+			closeEnough = false;
+			ApproachIntro = false;
+		}
 	}
 
 
@@ -106,6 +111,10 @@ public class head : MonoBehaviour
 			//ANIMATION : flower opens again
 		}
 
+		if (theCollision.gameObject.tag != flowers [beak.counter] || theCollision.gameObject.tag != "intro_closer" ){
+			intro_wrongFlower = false;
+			intro_approach = true;
+		}
 
 		if (theCollision.gameObject.tag == "intro_closer") {
 			
