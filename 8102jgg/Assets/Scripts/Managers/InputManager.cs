@@ -63,6 +63,8 @@ public class InputManager : MonoBehaviour
 	public static readonly string INPUT_CONTROLLER_BUTTON_SQUARE = "Controller Square";
 	/**The name of the input button corresponding to the ps3 controller RT*/
 	public static readonly string INPUT_CONTROLLER_BUTTON_RT = "PS3 Controller RT";
+
+	public static readonly string INPUT_CONTROLLER_BUTTON_Triangle = "PS3 Controller Triangle";
 	/**The name of the input button corresponding to the PS4 controller X button*/
 	public static readonly string INPUT_PS4_CONTROLLER_BUTTON_X = "PS4 Controller X";
 	/**The name of the input button corresponding to the PS4 controller square button*/
@@ -111,6 +113,17 @@ public class InputManager : MonoBehaviour
 			}
 			this.ManageBeakRotation ();
 		}
+	}
+
+	/**A function to return true when the user presses the triangle button.
+	 * Also manages pollenation functionalities relating to the firefly; should be called in an Update function, such that it consistently check for the input.*/
+	public bool ReturnPollenationInput()
+	{
+		bool input = Input.GetButtonDown (INPUT_CONTROLLER_BUTTON_Triangle);
+		if (input) {
+			this.GetComponent<GuidingFireflyManager> ().Pollenate ();
+		}
+		return input;
 	}
 
 	/**A function to update the bool corresponding to the focus*/
