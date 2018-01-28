@@ -70,7 +70,7 @@ public class beak : MonoBehaviour {
 		//if the HB's beek collides with the stigma
 		//***** MAY HAVE TO ADJUST COLLIDER ELEMENT IN UNITY AS IT IS NOT THE ENTIRE BODY OF THE BIRD
 		//THAT SHOULD TRIGGER THIS IF STATEMENT BUT ONLY THE BEAK***
-		if (theCollision.gameObject.tag == "stigma") {
+		if (theCollision.gameObject.tag == "stigma" && !head.WrongApproached) {
 
 			
 
