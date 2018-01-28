@@ -25,7 +25,7 @@ public class GuidingFireflyManager : MonoBehaviour {
 		this.m_PS = this.m_GuidingFirefly.GetComponent<ParticleSystem> ();
 		Color color = this.m_PS.main.startColor.color;
 		color = this.m_BCM.GetCurrentBeakColor();
-		this.m_PS.main.startColor.color = color;
+//		this.m_PS.main.startColor.color = color;
 
 	}
 
